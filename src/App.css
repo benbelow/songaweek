@@ -1,0 +1,40 @@
+:root {
+  --header-height: 70px;
+  --header-padding: 20px;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  z-index: 100;
+  height: var(--header-height);
+  padding: var(--header-padding);
+  color: white;
+  position: fixed;
+  width: 100%;
+}
+
+.App-body {
+  padding-top: calc(2 * var(--header-padding) + var(--header-height));
+}
+
+.App-title {
+  color: white;
+  cursor: pointer;
+}
+
+.App-title:hover {
+  color: grey;
+  cursor: pointer;
+}
+
+.App-intro {
+  font-size: large;
+}
