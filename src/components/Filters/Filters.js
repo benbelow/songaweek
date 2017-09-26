@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { disableFilter, enableFilter } from "./FilterActions";
-import { AppBar, Drawer, Toggle } from "material-ui";
+import { Toggle } from "material-ui";
+import muiThemeable from 'material-ui/styles/muiThemeable';
+
 
 class Filters extends Component {
   static propTypes = {
@@ -23,7 +25,7 @@ class Filters extends Component {
   render() {
     return (
       <div>
-        <Toggle style={{ margin: '4px' }} label="Themed" onToggle={this.onThemedToggle}/>
+        <Toggle style={{ margin: '4px' }} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Themed" onToggle={this.onThemedToggle}/>
       </div>
     )
   }
@@ -46,4 +48,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+export default connect(mapStateToProps, mapDispatchToProps)(muiThemeable()(Filters));

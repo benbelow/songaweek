@@ -5,7 +5,6 @@ import './App.css';
 import store from './redux/store';
 import ThreadFetcher from "./components/ThreadFetcher/ThreadFetcher";
 import SubmissionThreads from "./components/SubmissionThreads";
-import Filters from './components/Filters/Filters'
 import AppHeader from "./components/AppHeader/AppHeader";
 
 class App extends Component {
