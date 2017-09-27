@@ -16,6 +16,7 @@ class Submission extends Component {
   static propTypes = {
     comment: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -88,6 +89,7 @@ class Submission extends Component {
             link={formatter.link()}
             onExpand={() => this.setState({ isExpanded: !this.state.isExpanded })}
             canExpand={!isEmptyOrSpaces(description)}
+            url={this.props.url}
           />
           {this.state.isExpanded ? descriptionSection() : undefined}
           {chipSection()}

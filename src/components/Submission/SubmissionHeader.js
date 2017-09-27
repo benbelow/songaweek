@@ -29,6 +29,12 @@ const SubmissionHeader = (props) => {
           onClick={props.onExpand}
           disabled={!props.canExpand}
         />
+        <RaisedButton
+          style={buttonStyle}
+          label="OPEN"
+          secondary
+          onClick={() => window.open(props.url)}
+        />
       </Flexbox>
     </Flexbox>
 
@@ -39,13 +45,14 @@ SubmissionHeader.defaultProps = {
   canExpand: false,
 }
 
-SubmissionHeader.prototypes = {
+SubmissionHeader.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   onExpand: PropTypes.func.isRequired,
   canExpand: PropTypes.bool,
+  url: PropTypes.string.isRequired,
 };
 
 export default SubmissionHeader;

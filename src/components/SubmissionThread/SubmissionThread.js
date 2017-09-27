@@ -85,7 +85,12 @@ class SubmissionThread extends Component {
           >
             {_.map(this.submissions(), (s, i) => {
               return (
-                <Submission key={s.author + i} author={s.author} comment={s.comment}/>
+                <Submission
+                  key={s.author + i}
+                  author={s.author}
+                  comment={s.comment}
+                  url={`https://reddit.com/${s.subredditNamePrefixed}/comments/${s.threadId.replace('t3_', '')}/noop/${s.commentId.replace('t1_','')}`}
+                />
               )
             })}
           </Flexbox>

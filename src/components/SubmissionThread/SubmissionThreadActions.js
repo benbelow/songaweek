@@ -26,6 +26,9 @@ export function fetchSubmissions(threadId, url) {
           return {
             comment: i.data.body,
             author: i.data.author,
+            threadId: i.data.parent_id,
+            commentId: i.data.name,
+            subredditNamePrefixed: i.data.subreddit_name_prefixed,
           }
         });
       })
