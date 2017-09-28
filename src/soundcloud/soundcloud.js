@@ -11,7 +11,7 @@ export function signIn() {
 }
 
 export function setup() {
-  if (window.location.hostname == "localhost") {
+  if (window.location.hostname === "localhost") {
     console.log("setting up soundcloud...")
     SC.initialize({
       client_id: 'e2faf70422dd2a5bbc0240ade53aab4f',
