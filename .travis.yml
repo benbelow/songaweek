@@ -13,4 +13,5 @@ script:
   - npm run build
 
 after_success:
+  - firebase use reddit-to-soundcloud
   - firebase deploy --token=${FIREBASE_API_TOKEN}
