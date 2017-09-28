@@ -3,7 +3,6 @@ import SC from 'soundcloud';
 import { setup } from '../soundcloud/soundcloud';
 
 let initialized = false;
-let existingPlaylists;
 
 export const generatePlaylist = async (scUrls, playlistTitle) => {
   await init();
@@ -13,19 +12,12 @@ export const generatePlaylist = async (scUrls, playlistTitle) => {
       console.log('creating playlist...');
       await createPlaylist(values, playlistTitle)
       console.log('created playlist!');
-    })
-    .then(async () => {
-      console.log('caching playlists...')
-      existingPlaylists = await getExistingPlaylists();
-      console.log(existingPlaylists);
-    })
+    });
 };
 
-
-// Need to poll SC again for url as the API response doesn't return a payload
-// To avoid opening two login tabs, we cache the existing playlists after generation
-// This method relies upon that cache to dig out the link to the new playlist
-export const getPlaylistLinkForThread = (playlistTitle) => {
+export const getPlaylistLinkForThread = async (playlistTitle) => {
+  let existingPlaylists = await getExistingPlaylists();
+  console.log(existingPlaylists);
   let playlist = existingPlaylists.filter(p => p.title === playlistTitle)[0];
   return playlist.permalink_url;
 };
@@ -50,6 +42,7 @@ function createPlaylist(trackIds, playlistTitle) {
   });
   return getExistingPlaylists()
     .then(playlists => {
+      console.log(playlists);
       let existingTitles = playlists.map(p => p.title);
       if (!existingTitles.includes(playlistTitle)) {
         SC.connect().then(function () {
@@ -71,7 +64,7 @@ function createPlaylist(trackIds, playlistTitle) {
     })
 }
 
-function getExistingPlaylists() {
+async function getExistingPlaylists() {
   return SC.connect().then(function () {
     return SC.get("/me/playlists");
   });

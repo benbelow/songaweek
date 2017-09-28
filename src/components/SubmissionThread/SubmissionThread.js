@@ -27,7 +27,8 @@ class SubmissionThread extends Component {
       playlistTitle: undefined,
       playlistLink: undefined,
       shouldShowPlaylist: false,
-    }
+      loadingPlaylist: false,
+    };
     this.submissions = this.submissions.bind(this);
     this.fetchSubmissions = this.fetchSubmissions.bind(this);
     this.shouldShowGenerateScPlaylistButton = this.shouldShowGenerateScPlaylistButton.bind(this);
@@ -85,20 +86,30 @@ class SubmissionThread extends Component {
   }
 
   generateSoundcloudPlaylist() {
+    this.setState({...this.state, loadingPlaylist: true});
     const title = this.props.thread.title;
     generatePlaylist(_.flatten(_.map(this.submissions(), s => {
         return _.filter(extractUrls(s.comment), u => isSoundCloudUrl(u))
       }))
       , title)
-      .then(() => {
-      console.log('Generated playlist');
-        this.setState({
+      .then(async () => {
+      // Slight delay as otherwise the playlist doesn't show up in Soundcloud API response
+        setTimeout(async () => this.setState({
           ...this.state,
           shouldShowPlaylist: true,
           playlistTitle: title,
-          playlistLink: getPlaylistLinkForThread(title),
-        })
+          playlistLink: await getPlaylistLinkForThread(title),
+          loadingPlaylist: false,
+        }), 100);
       });
+  }
+
+  shouldShowPlaylistLink() {
+    return this.state.shouldShowPlaylist && this.state.playlistLink;
+  }
+
+  shouldShowLoadingText() {
+    return this.state.loadingPlaylist;
   }
 
   render() {
@@ -134,6 +145,7 @@ class SubmissionThread extends Component {
           <ReactMarkdown source={description(thread)}/>
 
           {this.shouldShowGenerateScPlaylistButton() ? generateScPlaylistButton : undefined}
+          {this.shouldShowLoadingText() ? <p>Generating playlist, please wait...</p> : undefined}
           {this.shouldShowPlaylistLink() ? scPlaylistLink : undefined}
 
           <Divider/>
@@ -159,10 +171,6 @@ class SubmissionThread extends Component {
       </Card>
     );
   };
-
-  shouldShowPlaylistLink() {
-    return this.state.shouldShowPlaylist && this.state.playlistLink;
-  }
 }
 
 const mapStateToProps = state => {
