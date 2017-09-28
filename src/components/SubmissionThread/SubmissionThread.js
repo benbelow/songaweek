@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardActions, CardHeader, CardText, Divider } from "material-ui";
+import { Card, CardHeader, CardText, Divider, RaisedButton } from "material-ui";
 import Flexbox from 'flexbox-react';
 import { description, theme, week } from "./ThreadHelpers";
 import ReactMarkdown from 'react-markdown';
@@ -9,6 +9,9 @@ import _ from "lodash";
 import { fetchSubmissions } from "./SubmissionThreadActions";
 import Submission from "../Submission/Submission";
 import Formatter from "../Submission/Formatter";
+import { extractUrls } from "../../helpers/UrlParser";
+import { isSoundCloudUrl } from "../../helpers/UrlValidator"
+import { generatePlaylist, getPlaylistLinkForThread } from "../../soundcloud/PlaylistGenerator";
 
 
 class SubmissionThread extends Component {
@@ -17,6 +20,19 @@ class SubmissionThread extends Component {
     threadSubmissions: PropTypes.array,
     isThemedFilter: PropTypes.bool,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      playlistTitle: undefined,
+      playlistLink: undefined,
+      shouldShowPlaylist: false,
+    }
+    this.submissions = this.submissions.bind(this);
+    this.fetchSubmissions = this.fetchSubmissions.bind(this);
+    this.shouldShowGenerateScPlaylistButton = this.shouldShowGenerateScPlaylistButton.bind(this);
+    this.generateSoundcloudPlaylist = this.generateSoundcloudPlaylist.bind(this);
+  }
 
   cardStyle = {
     margin: 16,
@@ -29,11 +45,7 @@ class SubmissionThread extends Component {
     alignContent: 'stretch'
   };
 
-  constructor(props) {
-    super(props);
-    this.submissions = this.submissions.bind(this);
-    this.fetchSubmissions = this.fetchSubmissions.bind(this);
-  }
+  cachedSubmissions;
 
   themedFilter = submission => {
     if (!this.props.isThemedFilter) {
@@ -44,13 +56,18 @@ class SubmissionThread extends Component {
   };
 
   submissions() {
+    if (this.cachedSubmissions) {
+      return this.cachedSubmissions;
+    }
+
     let currentThread = _.first(_.filter(this.props.threadSubmissions, ts => this.props.thread.id === ts.threadId));
 
     if (!currentThread) {
-      return undefined;
+      this.cachedSubmissions = null;
     } else {
-      return _.filter(currentThread.submissions, this.themedFilter);
+      this.cachedSubmissions = _.filter(currentThread.submissions, this.themedFilter);
     }
+    return this.cachedSubmissions;
   }
 
   fetchSubmissions() {
@@ -59,8 +76,47 @@ class SubmissionThread extends Component {
     }
   }
 
+  shouldShowGenerateScPlaylistButton() {
+    let submissions = this.submissions();
+    return submissions && submissions.length > 0
+      && _.filter(submissions, s => {
+        return _.filter(extractUrls(s.comment), u => isSoundCloudUrl(u)).length > 0;
+      }).length > 0;
+  }
+
+  generateSoundcloudPlaylist() {
+    const title = this.props.thread.title;
+    generatePlaylist(_.flatten(_.map(this.submissions(), s => {
+        return _.filter(extractUrls(s.comment), u => isSoundCloudUrl(u))
+      }))
+      , title)
+      .then(() => {
+      console.log('Generated playlist');
+        this.setState({
+          ...this.state,
+          shouldShowPlaylist: true,
+          playlistTitle: title,
+          playlistLink: getPlaylistLinkForThread(title),
+        })
+      });
+  }
+
   render() {
     const thread = this.props.thread;
+    const generateScPlaylistButton = (
+      <RaisedButton
+        style={{ marginBottom: '16px' }}
+        label='Generate Soundcloud Playlist'
+        onClick={this.generateSoundcloudPlaylist}/>
+    );
+
+    const scPlaylistLink = (
+      <RaisedButton
+        style={{ marginBottom: '16px', marginLeft: "16px"}}
+        secondary
+        label="Soundcloud Playlist"
+        onClick={() => window.open(this.state.playlistLink)}/>
+    );
 
     return (
       <Card
@@ -73,10 +129,14 @@ class SubmissionThread extends Component {
           actAsExpander
           showExpandableButton
         />
-        <CardActions/>
         <Divider/>
         <CardText expandable>
           <ReactMarkdown source={description(thread)}/>
+
+          {this.shouldShowGenerateScPlaylistButton() ? generateScPlaylistButton : undefined}
+          {this.shouldShowPlaylistLink() ? scPlaylistLink : undefined}
+
+          <Divider/>
 
           <Flexbox style={this.flexboxStyle}
                    flexDirection="column"
@@ -89,7 +149,7 @@ class SubmissionThread extends Component {
                   key={s.author + i}
                   author={s.author}
                   comment={s.comment}
-                  url={`https://reddit.com/${s.subredditNamePrefixed}/comments/${s.threadId.replace('t3_', '')}/noop/${s.commentId.replace('t1_','')}`}
+                  url={`https://reddit.com/${s.subredditNamePrefixed}/comments/${s.threadId.replace('t3_', '')}/noop/${s.commentId.replace('t1_', '')}`}
                 />
               )
             })}
@@ -99,6 +159,10 @@ class SubmissionThread extends Component {
       </Card>
     );
   };
+
+  shouldShowPlaylistLink() {
+    return this.state.shouldShowPlaylist && this.state.playlistLink;
+  }
 }
 
 const mapStateToProps = state => {

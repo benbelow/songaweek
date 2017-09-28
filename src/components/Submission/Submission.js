@@ -24,8 +24,6 @@ class Submission extends Component {
     this.state = { isExpanded: false }
   }
 
-  cardStyle = {};
-
   chipStyle = {
     margin: '8px',
   };
@@ -80,7 +78,7 @@ class Submission extends Component {
     }
     return (
       <Flexbox margin="8px" marginRight='auto' marginLeft='auto'>
-        <Paper style={this.cardStyle}>
+        <Paper>
           <SubmissionHeader
             style={{ position: 'absolute' }}
             title={songTitle}

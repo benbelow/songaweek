@@ -16,7 +16,7 @@ export const getHost = url => {
   }
 };
 
-const isSoundCloudUrl = url => {
+export const isSoundCloudUrl = url => {
   return url.includes("soundcloud.com")
 };
 
