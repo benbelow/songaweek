@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import PropTypes from 'prop-types';
 import snoo from '../../snoo.png';
-import '../../App.css';
+import '../App/App.css';
 import { connect } from "react-redux";
 import { toggleMenu } from "./HeaderActions";
 import Filters from "../Filters/Filters";

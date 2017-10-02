@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { MuiThemeProvider } from 'material-ui';
 import './App.css';
-import store from './redux/store';
-import ThreadFetcher from "./components/ThreadFetcher/ThreadFetcher";
-import SubmissionThreads from "./components/SubmissionThreads";
-import AppHeader from "./components/AppHeader/AppHeader";
+import store from '../../redux/store';
+import ThreadFetcher from "../ThreadFetcher/ThreadFetcher";
+import SubmissionThreads from "../SubmissionThreads";
+import AppHeader from "../AppHeader/AppHeader";
 
 class App extends Component {
   render() {
