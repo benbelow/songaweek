@@ -11,16 +11,19 @@ class AppHeader extends Component {
     toggleMenu: PropTypes.func,
   };
 
+  appVersion = 0.5;
+
   render() {
     return (
       <div className="App-header">
-        <Flexbox flexDirection='row'>
-          <img src={snoo} className="App-logo" alt="logo"/>
-          <h2 onClick={() => window.open('https://www.reddit.com/r/songaweek/')} className='App-title'>
-            The Song A Week Challenge
-          </h2>
-          <Flexbox style={{ margin: 'auto', padding: '8px' }} justifyContent="center" height='100%'>
+        <Flexbox flexDirection='row' justifyContent='space-between'>
+          <Flexbox flexDirection='row'>
+            <img src={snoo} className="App-logo" alt="logo"/>
+            <h2 onClick={() => window.open('https://www.reddit.com/r/songaweek/')} className='App-title'>
+              The Song A Week Challenge
+            </h2>
           </Flexbox>
+          <p style={{ fontSize: 8 }}>v{this.appVersion}</p>
         </Flexbox>
       </div>
     );
