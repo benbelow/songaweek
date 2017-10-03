@@ -7,7 +7,7 @@ const SubmissionHeader = (props) => {
   const buttonStyle = {marginLeft: '4px', marginRight: '4px'};
   const openLink = () => window.open(props.link, '_blank');
   return (
-    <Flexbox flexDirection='row' alignItems='flex-start'>
+    <Flexbox flexDirection='row' alignItems='flex-start' flexWrap='wrap'>
       <ListItem
         style={{textAlign: 'left'}}
         leftAvatar={<Avatar size={40} src={props.imageSrc}/>}
@@ -15,7 +15,7 @@ const SubmissionHeader = (props) => {
         secondaryText={props.subtitle}
         onClick={openLink}
       />
-      <Flexbox style={{margin: 'auto', padding: '8px'}} justifyContent="center" height='100%'>
+      <Flexbox style={{margin: 'auto', padding: '8px'}} flexDirection='row' justifyContent="center" height='100%' flexWrap='wrap'>
         <RaisedButton
           style={buttonStyle}
           label="LISTEN"
@@ -32,7 +32,7 @@ const SubmissionHeader = (props) => {
         <RaisedButton
           style={buttonStyle}
           label="OPEN"
-          secondary
+          primary
           onClick={() => window.open(props.url)}
         />
       </Flexbox>
@@ -43,7 +43,7 @@ const SubmissionHeader = (props) => {
 
 SubmissionHeader.defaultProps = {
   canExpand: false,
-}
+};
 
 SubmissionHeader.propTypes = {
   imageSrc: PropTypes.string.isRequired,

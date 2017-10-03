@@ -86,14 +86,14 @@ class SubmissionThread extends Component {
   }
 
   generateSoundcloudPlaylist() {
-    this.setState({...this.state, loadingPlaylist: true});
+    this.setState({ ...this.state, loadingPlaylist: true });
     const title = this.props.thread.title;
     generatePlaylist(_.flatten(_.map(this.submissions(), s => {
         return _.filter(extractUrls(s.comment), u => isSoundCloudUrl(u))
       }))
       , title)
       .then(async () => {
-      // Slight delay as otherwise the playlist doesn't show up in Soundcloud API response
+        // Slight delay as otherwise the playlist doesn't show up in Soundcloud API response
         setTimeout(async () => this.setState({
           ...this.state,
           shouldShowPlaylist: true,
@@ -123,7 +123,7 @@ class SubmissionThread extends Component {
 
     const scPlaylistLink = (
       <RaisedButton
-        style={{ marginBottom: '16px', marginLeft: "16px"}}
+        style={{ marginBottom: '16px', marginLeft: "16px" }}
         secondary
         label="Soundcloud Playlist"
         onClick={() => window.open(this.state.playlistLink)}/>
@@ -144,9 +144,11 @@ class SubmissionThread extends Component {
         <CardText expandable>
           <ReactMarkdown source={description(thread)}/>
 
-          {this.shouldShowGenerateScPlaylistButton() ? generateScPlaylistButton : undefined}
-          {this.shouldShowLoadingText() ? <p>Generating playlist, please wait...</p> : undefined}
-          {this.shouldShowPlaylistLink() ? scPlaylistLink : undefined}
+          <Flexbox flexWrap='wrap' flexDirection='row' justifyContent='center'>
+            {this.shouldShowGenerateScPlaylistButton() ? generateScPlaylistButton : undefined}
+            {this.shouldShowLoadingText() ? <p>Generating playlist, please wait...</p> : undefined}
+            {this.shouldShowPlaylistLink() ? scPlaylistLink : undefined}
+          </Flexbox>
 
           <Divider/>
 
