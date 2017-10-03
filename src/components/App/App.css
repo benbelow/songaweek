@@ -5,6 +5,8 @@
 
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -17,12 +19,11 @@
   height: var(--header-height);
   padding: var(--header-padding);
   color: white;
-  position: fixed;
   width: 100%;
 }
 
 .App-body {
-  padding-top: calc(2 * var(--header-padding) + var(--header-height));
+  padding-top: 20px;
 }
 
 .App-title {

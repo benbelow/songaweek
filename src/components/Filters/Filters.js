@@ -11,6 +11,7 @@ class Filters extends Component {
     themed: PropTypes.bool,
     enableFilter: PropTypes.func,
     disableFilter: PropTypes.func,
+    muiTheme: PropTypes.object,
   };
 
   onThemedToggle = (e, isChecked) => {
@@ -24,8 +25,8 @@ class Filters extends Component {
 
   render() {
     return (
-      <div>
-        <Toggle style={{ margin: '4px' }} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Themed" onToggle={this.onThemedToggle}/>
+      <div style={{backgroundColor: '#444', position: 'sticky', top: '0', zIndex: 99}}>
+        <Toggle style={{ margin: '4px', width: '50%' }} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Themed" onToggle={this.onThemedToggle}/>
       </div>
     )
   }

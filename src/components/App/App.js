@@ -6,6 +6,7 @@ import store from '../../redux/store';
 import ThreadFetcher from "../ThreadFetcher/ThreadFetcher";
 import SubmissionThreads from "../SubmissionThreads";
 import AppHeader from "../AppHeader/AppHeader";
+import Filters from "../Filters/Filters";
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
         <MuiThemeProvider>
           <div className="App">
             <AppHeader/>
+            <Filters/>
             <div className="App-body">
               <ThreadFetcher/>
               <SubmissionThreads/>

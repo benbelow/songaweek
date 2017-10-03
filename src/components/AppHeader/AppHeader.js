@@ -5,7 +5,6 @@ import snoo from '../../snoo.png';
 import '../App/App.css';
 import { connect } from "react-redux";
 import { toggleMenu } from "./HeaderActions";
-import Filters from "../Filters/Filters";
 
 class AppHeader extends Component {
   static propTypes = {
@@ -21,8 +20,6 @@ class AppHeader extends Component {
             The Song A Week Challenge
           </h2>
           <Flexbox style={{ margin: 'auto', padding: '8px' }} justifyContent="center" height='100%'>
-            {/*<RaisedButton style={{ display: 'flex', float: 'right' }} label="MENU" onClick={this.props.toggleMenu}/>*/}
-            <Filters/>
           </Flexbox>
         </Flexbox>
       </div>
