@@ -57,18 +57,16 @@ class SubmissionThread extends Component {
   };
 
   submissions() {
-    if (this.cachedSubmissions) {
-      return this.cachedSubmissions;
-    }
+    if (!this.cachedSubmissions) {
+      let currentThread = _.first(_.filter(this.props.threadSubmissions, ts => this.props.thread.id === ts.threadId));
 
-    let currentThread = _.first(_.filter(this.props.threadSubmissions, ts => this.props.thread.id === ts.threadId));
-
-    if (!currentThread) {
-      this.cachedSubmissions = null;
-    } else {
-      this.cachedSubmissions = _.filter(currentThread.submissions, this.themedFilter);
+      if (!currentThread) {
+        this.cachedSubmissions = null;
+      } else {
+        this.cachedSubmissions = currentThread.submissions;
+      }
     }
-    return this.cachedSubmissions;
+    return this.cachedSubmissions ? _.filter(this.cachedSubmissions, this.themedFilter) : null;
   }
 
   fetchSubmissions() {
