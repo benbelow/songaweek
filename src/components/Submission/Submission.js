@@ -45,7 +45,7 @@ class Submission extends Component {
       return (
         <div>
           <Divider/>
-          <div style={{ maxWidth: '350px', margin: '8px' }}>
+          <div style={{ maxWidth: '350px', margin: 'auto', padding: '8px' }}>
             <ReactMarkdown source={description}/>
           </div>
         </div>
