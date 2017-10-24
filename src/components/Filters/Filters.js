@@ -23,10 +23,22 @@ class Filters extends Component {
     }
   };
 
+  onPrivateToggle = (e, isChecked) => {
+    const filterName = "private";
+    if (isChecked) {
+      this.props.enableFilter(filterName);
+    } else {
+      this.props.disableFilter(filterName);
+    }
+  };
+
   render() {
     return (
-      <div style={{backgroundColor: '#444', position: 'sticky', top: '0', zIndex: 99}}>
-        <Toggle style={{ margin: '4px', width: '50%' }} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Themed" onToggle={this.onThemedToggle}/>
+      <div style={{backgroundColor: '#444', position: 'sticky', top: '0', zIndex: 99, display: 'flex', justifyContent: 'left'}}>
+        <Toggle style={{ margin: '4px', width: '25%', marginRight: 24 }} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Themed Only" onToggle={this.onThemedToggle}/>
+        <div style={{backgroundColor: '#333', width: 3}} />
+        <Toggle style={{ margin: '4px', width: '25%', marginRight: 24}} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Private Playlists?" onToggle={this.onPrivateToggle}/>
+        <div style={{backgroundColor: '#333', width: 3}} />
       </div>
     )
   }

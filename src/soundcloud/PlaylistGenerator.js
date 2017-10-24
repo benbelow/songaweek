@@ -4,13 +4,13 @@ import { setup } from '../soundcloud/soundcloud';
 
 let initialized = false;
 
-export const generatePlaylist = async (scUrls, playlistTitle) => {
+export const generatePlaylist = async (scUrls, playlistTitle, isPrivate) => {
   await init();
   let soundCloudIds = _.map(scUrls, u => Promise.resolve(getSoundCloudIdFromLink(u)));
   await Promise.all(soundCloudIds)
     .then(async values => {
       console.log('creating playlist...');
-      await createPlaylist(values, playlistTitle)
+      await createPlaylist(values, playlistTitle, isPrivate);
       console.log('created playlist!');
     });
 };
@@ -35,8 +35,8 @@ function getSoundCloudIdFromLink(link) {
     .then(track => track.id);
 }
 
-function createPlaylist(trackIds, playlistTitle) {
-  let sharing = 'public';
+function createPlaylist(trackIds, playlistTitle, isPrivate) {
+  let sharing = isPrivate ? 'private' : 'public';
   const tracks = trackIds.map(id => {
     return { id: id }
   });

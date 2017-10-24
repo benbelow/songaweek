@@ -19,6 +19,7 @@ class SubmissionThread extends Component {
     thread: PropTypes.object.isRequired,
     threadSubmissions: PropTypes.array,
     isThemedFilter: PropTypes.bool,
+    isPrivateFilter: PropTypes.bool,
   };
 
   constructor(props) {
@@ -88,8 +89,9 @@ class SubmissionThread extends Component {
     const title = this.props.thread.title;
     generatePlaylist(_.flatten(_.map(this.submissions(), s => {
         return _.filter(extractUrls(s.comment), u => isSoundCloudUrl(u))
-      }))
-      , title)
+      })),
+      title,
+      this.props.isPrivateFilter)
       .then(async () => {
         // Slight delay as otherwise the playlist doesn't show up in Soundcloud API response
         setTimeout(async () => this.setState({
@@ -176,7 +178,8 @@ class SubmissionThread extends Component {
 const mapStateToProps = state => {
   return {
     threadSubmissions: _.filter(state.submissionThread.threadSubmissions),
-    isThemedFilter: state.filters.themed
+    isThemedFilter: state.filters.themed,
+    isPrivateFilter: state.filters.private,
   }
 };
 
