@@ -4,6 +4,8 @@ import {extractUrls} from "../../helpers/UrlParser";
 
 export const UPDATE_SUBMISSIONS = 'UPDATE_SUBMISSIONS';
 
+const REDDIT_KIND_ID_COMMENT = 't1';
+
 const containsValidSubmissionUrl = comment => {
   return _.filter(extractUrls(comment), u => isValidSubmissionUrl(u)).length > 0;
 };
@@ -17,12 +19,12 @@ export function updateSubmissions(threadSubmissions) {
 
 export function fetchSubmissions(threadId, url) {
   return dispatch => {
-    fetch(url + ".json?", { method: 'get', mode: 'cors' })
+    fetch(url + ".json?limit=1000", { method: 'get', mode: 'cors' })
       .then(function(response) {
         return response.json();
       })
       .then(data => {
-        return _.map(data[1].data.children, i => {
+          return data[1].data.children.filter(c => c.kind === REDDIT_KIND_ID_COMMENT).map(i => {
           return {
             comment: i.data.body,
             author: i.data.author,
