@@ -11,7 +11,7 @@ class AppHeader extends Component {
     toggleMenu: PropTypes.func,
   };
 
-  appVersion = 0.6;
+  appVersion = '0.6.1';
 
   render() {
     return (
