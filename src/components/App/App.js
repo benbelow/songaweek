@@ -9,7 +9,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import Filters from "../Filters/Filters";
 import Route from "react-router/es/Route";
 import Redirect from "react-router/es/Redirect";
-import Users from "../Users";
+import Users from "../Users/Users";
 import Switch from "react-router/es/Switch";
 
 class App extends Component {
