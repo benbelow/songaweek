@@ -33,7 +33,6 @@ export function fetchAllThreads() {
             lastBatch = await fetch(`${subredditUrl}&limit=100&count=${page * 100}&after=${after}`, {method: 'get', mode: 'cors'})
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     after = data.data.after;
                     return _.map(data.data.children, c => c.data)
                 })
@@ -46,6 +45,8 @@ export function fetchAllThreads() {
         console.log(`Total Submission Threads ever: ${submissionThreads.length}`);
 
         dispatch(updateThreads(submissionThreads));
+
+        return submissionThreads;
     }
 }
 
