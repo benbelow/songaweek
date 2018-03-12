@@ -16,7 +16,7 @@ class Users extends Component {
                 <h1>Users</h1>
                 {_.map(_.sortBy(this.props.users, 'submissionCount').reverse(), u => {
                     return (
-                        <Card>
+                        <Card key={u.username}>
                             <div>
                                 <h4>{u.username}</h4>
                                 <div>Total Submissions: {u.submissionCount}</div>
