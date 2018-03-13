@@ -27,7 +27,7 @@ export function fetchAllThreads() {
         let submissionThreads = [];
         let lastBatch;
         let page = 0;
-        let after;
+        let after = '';
 
         do {
             lastBatch = await fetch(`${subredditUrl}&limit=100&count=${page * 100}&after=${after}`, {method: 'get', mode: 'cors'})
@@ -40,7 +40,7 @@ export function fetchAllThreads() {
             submissionThreads = _.concat(submissionThreads, lastBatch);
             console.log(`Fetched a page of (max) 100 threads, of which ${lastBatch.length} were submission threads. `);
             page++;
-        } while (lastBatch.length !== 0 && page < 50);
+        } while (lastBatch.length !== 0 && page < 50 && after !== null);
 
         console.log(`Total Submission Threads ever: ${submissionThreads.length}`);
 
