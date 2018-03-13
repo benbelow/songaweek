@@ -89,7 +89,7 @@ export default class Formatter {
         }
         const bracketRegex = hasParensGenre ? openingBracketsRegex : openingSquareBracketsRegex;
         const innerRegex = hasParensGenre ? /\((.*?)\)/ : /\[(.*?)]/;
-        return _.first(strippedComment.match(bracketRegex)).match(innerRegex)[1];
+        return _.first(strippedComment.match(bracketRegex)).replace('\n', '').match(innerRegex)[1];
     }
 
     themed() {
