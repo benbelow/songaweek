@@ -3,8 +3,7 @@ import Flexbox from 'flexbox-react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 
-import {syncData, toggleMenu} from "./HeaderActions";
-import AutoRenew from 'material-ui/svg-icons/action/autorenew';
+import {toggleMenu} from "./HeaderActions";
 import snoo from '../../snoo.png';
 import '../App/App.css';
 
@@ -25,11 +24,6 @@ class AppHeader extends Component {
                         <h2 onClick={() => window.open('https://www.reddit.com/r/songaweek/')} className='App-title'>
                             The Song A Week Challenge
                         </h2>
-                        <AutoRenew
-                            style={{ marginLeft: 12, paddingTop: '5%', width: 40, height: 40, cursor: 'pointer' }}
-                            color={'#FFFFFF'}
-                            onClick={this.props.syncData}
-                        />
                     </Flexbox>
                     <p style={{fontSize: 8}}>v{this.appVersion}</p>
                 </Flexbox>
@@ -41,7 +35,6 @@ class AppHeader extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         toggleMenu: () => dispatch(toggleMenu()),
-        syncData: () => dispatch(syncData()),
     }
 };
 

@@ -32,6 +32,7 @@ export function fetchAllThreads() {
         do {
             lastBatch = await fetch(`${subredditUrl}&limit=100&count=${page * 100}&after=${after}`, {method: 'get', mode: 'cors'})
                 .then(response => response.json())
+                // eslint-disable-next-line
                 .then(data => {
                     after = data.data.after;
                     return _.map(data.data.children, c => c.data)

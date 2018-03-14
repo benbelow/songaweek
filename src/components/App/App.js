@@ -11,6 +11,7 @@ import Route from "react-router/es/Route";
 import Redirect from "react-router/es/Redirect";
 import Users from "../Users/Users";
 import Switch from "react-router/es/Switch";
+import Admin from "../Admin/Admin";
 
 class App extends Component {
     render() {
@@ -25,6 +26,7 @@ class App extends Component {
                             <Switch>
                                 <Route path='/threads' component={SubmissionThreads}/>
                                 <Route path='/users' component={Users}/>
+                                <Route path='/admin' component={Admin}/>
                                 <Redirect from='*' to='threads'/>
                             </Switch>
                         </div>
