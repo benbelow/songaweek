@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {toggleMenu} from "./HeaderActions";
 import snoo from '../../snoo.png';
 import '../App/App.css';
+import { version } from '../../../package.json'
 
 class AppHeader extends Component {
     static propTypes = {
@@ -13,7 +14,7 @@ class AppHeader extends Component {
         syncData: PropTypes.func,
     };
 
-    appVersion = '0.6.1';
+    appVersion = version;
 
     render() {
         return (
@@ -25,7 +26,7 @@ class AppHeader extends Component {
                             The Song A Week Challenge
                         </h2>
                     </Flexbox>
-                    <p style={{fontSize: 8}}>v{this.appVersion}</p>
+                    <p style={{fontSize: 10}}>v{this.appVersion}</p>
                 </Flexbox>
             </div>
         );
