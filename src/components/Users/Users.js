@@ -14,7 +14,7 @@ class Users extends Component {
         return (
             <div>
                 <h1>Users</h1>
-                {_.map(_.sortBy(this.props.users, 'submissionCount').reverse(), u => {
+                {_.map(_.sortBy(this.users(), 'submissionCount').reverse(), u => {
                     return (
                         <Card key={u.username}>
                             <div>
@@ -28,6 +28,8 @@ class Users extends Component {
             </div>
         );
     };
+
+    users = () => this.props.users.filter(u => u.submissionCount > 1);
 }
 
 const mapStateToProps = state => ({
