@@ -4,6 +4,8 @@ import {database} from "../../database";
 
 export const UPDATE_USERS_LIST = 'UPDATE_USERS_LIST';
 
+const DELETED_USER_USERNAME = '[deleted]';
+
 export function updateUsers(users) {
     return {
         type: UPDATE_USERS_LIST,
@@ -22,7 +24,7 @@ export function fetchUsers() {
                     themedSubmissionCount: _.filter(submissions, s => s.themed).length,
                 };
             });
-            dispatch(updateUsers(userData));
+            dispatch(updateUsers(userData.filter(ud => ud.username !== DELETED_USER_USERNAME)));
         });
     }
 }
