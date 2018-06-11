@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import SC from 'soundcloud';
-import { setup } from '../soundcloud/soundcloud';
+import { setup } from './soundcloud';
 
 let initialized = false;
 

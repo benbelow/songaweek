@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import {database} from "../../firebase/database";
-import {fetchAllThreads} from "../ThreadFetcher/ThreadFetcherActions";
-import {fetchSubmissions} from "../SubmissionThread/SubmissionThreadActions";
-import Formatter from "../Submission/Formatter";
+import {database} from "../../integrations/firebase/database";
+import {fetchAllThreads} from "../submissionThreads/components/ThreadFetcher/ThreadFetcherActions";
+import {fetchSubmissions} from "../submissionThreads/components/SubmissionThread/SubmissionThreadActions";
+import Formatter from "../submissionThreads/components/Submission/Formatter";
 
 export const SYNC_DATA = 'SYNC_DATA';
 

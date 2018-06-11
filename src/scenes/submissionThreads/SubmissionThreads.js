@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import _ from 'lodash';
-import SubmissionThread from "./SubmissionThread/SubmissionThread";
+import SubmissionThread from "./components/SubmissionThread/SubmissionThread";
 
 class SubmissionThreads extends Component {
   render() {

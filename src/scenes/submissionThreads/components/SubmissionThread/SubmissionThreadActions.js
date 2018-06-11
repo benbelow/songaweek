@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import {isValidSubmissionUrl} from "../../helpers/UrlValidator";
-import {extractUrls} from "../../helpers/UrlParser";
+import {isValidSubmissionUrl} from "../../../../helpers/UrlValidator";
+import {extractUrls} from "../../../../helpers/UrlParser";
 
 export const UPDATE_SUBMISSIONS = 'UPDATE_SUBMISSIONS';
 
