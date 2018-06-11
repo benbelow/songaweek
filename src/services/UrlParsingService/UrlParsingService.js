@@ -18,7 +18,8 @@ export const getHost = url => {
     }
 };
 export const isSoundCloudUrl = url => url.includes("soundcloud.com");
+export const isValidSubmissionUrl = url => getHost(url) !== undefined;
+
 const isClypUrl = url => url.includes("https://clyp.it") || url.includes("http://clyp.it");
 const isYouTubeUrl = url => (url.includes("youtube.com") || url.includes("youtu.be/")) && !url.includes('playlist?');
 const isBandcampUrl = url => url.includes("bandcamp.com");
-export const isValidSubmissionUrl = url => getHost(url) !== undefined;
