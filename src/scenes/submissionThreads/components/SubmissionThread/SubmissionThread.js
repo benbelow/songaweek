@@ -9,8 +9,8 @@ import _ from "lodash";
 import { fetchSubmissions } from "./SubmissionThreadActions";
 import Submission from "../Submission/Submission";
 import Formatter from "../Submission/Formatter";
-import { extractUrls } from "../../../../helpers/UrlParser";
-import { isSoundCloudUrl } from "../../../../helpers/UrlValidator"
+import { extractUrls } from "../../../../services/UrlParsingService";
+import { isSoundCloudUrl } from "../../../../services/UrlParsingService"
 import { generatePlaylist, getPlaylistLinkForThread } from "../../../../integrations/soundcloud/PlaylistGenerator";
 
 

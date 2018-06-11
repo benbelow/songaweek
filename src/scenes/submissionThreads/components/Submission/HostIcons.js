@@ -1,5 +1,5 @@
-import {getHost} from '../../../../helpers/UrlValidator'
-import {Hosts} from "../../../../helpers/Hosts";
+import {getHost} from '../../../../services/UrlParsingService'
+import {Hosts} from "../../../../config/Hosts";
 
 const scLogoUrl = "https://images.vexels.com/media/users/3/137412/isolated/preview/1802b9d8ce3c819eebe90a86bbb61077-soundcloud-icon-logo-by-vexels.png";
 const clypLogoUrl ="https://static.clyp.it/site/images/favicons/apple-touch-icon-precomposed.png";
