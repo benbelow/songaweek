@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {database} from "../../database";
+import {database} from "../../firebase/database";
 
 export const UPDATE_USERS_LIST = 'UPDATE_USERS_LIST';
 

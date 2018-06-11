@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {database} from "../../database";
+import {database} from "../../firebase/database";
 import {fetchAllThreads} from "../ThreadFetcher/ThreadFetcherActions";
 import {fetchSubmissions} from "../SubmissionThread/SubmissionThreadActions";
 import Formatter from "../Submission/Formatter";

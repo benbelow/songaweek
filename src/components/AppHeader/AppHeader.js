@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 
 import {toggleMenu} from "./HeaderActions";
-import snoo from '../../snoo.png';
+import snoo from '../../assets/snoo.png';
 import '../App/App.css';
 import { version } from '../../../package.json'
 
