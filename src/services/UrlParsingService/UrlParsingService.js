@@ -15,5 +15,6 @@ export const getHost = url => {
     }
     return host;
 };
+
 export const isSoundCloudUrl = url => url.includes("soundcloud.com");
 export const isValidSubmissionUrl = url => getHost(url) !== undefined;
