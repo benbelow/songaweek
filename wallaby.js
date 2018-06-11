@@ -1,15 +1,6 @@
 module.exports = function (wallaby) {
 
-    var wallabyWebpack = require('wallaby-webpack');
-    var webpack = require('webpack');
-    var wallabyPostprocessor = wallabyWebpack({
-        plugins:
-            [
-                new webpack.NormalModuleReplacementPlugin(/\.(gif|png|scss|css)$/, 'node-noop')
-            ],
-    });
-
-    // Babel, jest-cli and some other modules are located under
+    // Babel, jest-cli and some other modules may be located under
     // react-scripts/node_modules, so need to let node.js know about it
     var path = require('path');
     process.env.NODE_PATH +=
@@ -19,16 +10,14 @@ module.exports = function (wallaby) {
         path.join(__dirname, 'node_modules/react-scripts/node_modules');
     require('module').Module._initPaths();
 
-    // Babel needs this
-    process.env.NODE_ENV = 'development';
-
     return {
         files: [
             'src/**/*.+(js|jsx|json|snap|css|less|sass|scss|jpg|jpeg|gif|png|svg)',
-            '!src/**/*.test.js'
+            '!src/**/*.test.js?(x)',
+            'node_modules/react-router/**'
         ],
 
-        tests: ['src/**/*.test.js'],
+        tests: ['src/**/*.test.js?(x)'],
 
         env: {
             type: 'node',
@@ -36,19 +25,19 @@ module.exports = function (wallaby) {
         },
 
         compilers: {
-            '**/*.js': wallaby.compilers.babel({
+            '**/*.js?(x)': wallaby.compilers.babel({
                 babel: require('babel-core'),
-                presets: ['react-app', 'es2017']
-            }),
+                presets: ['react-app']
+            })
         },
 
-        setup: (wallaby) => {
+        setup: wallaby => {
             const jestConfig = require('react-scripts/scripts/utils/createJestConfig')(p => require.resolve('react-scripts/' + p));
-            delete jestConfig.transform['^.+\\.(js|jsx)$'];
+            Object.keys(jestConfig.transform || {}).forEach(k => ~k.indexOf('^.+\\.(js|jsx') && void delete jestConfig.transform[k]);
             delete jestConfig.testEnvironment;
             wallaby.testFramework.configure(jestConfig);
         },
 
-        testFramework: 'jest',
+        testFramework: 'jest'
     };
 };

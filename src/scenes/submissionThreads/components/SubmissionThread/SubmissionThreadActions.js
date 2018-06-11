@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import {isValidSubmissionUrl} from "../../../../services/UrlParsingService";
-import {extractUrls} from "../../../../services/UrlParsingService";
+import {isValidSubmissionUrl} from "../../../../services/UrlParsingService/UrlParsingService";
+import {extractUrls} from "../../../../services/UrlParsingService/UrlParsingService";
 
 export const UPDATE_SUBMISSIONS = 'UPDATE_SUBMISSIONS';
 
