@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { Hosts } from '../../config/Hosts';
 
 const urlRegex = /(((ftp|https?):\/\/)[-\w@:%_+.~#?,&//=]+)|((mailto:)?[_.\w-]+@([\w][\w-]+\.)+[a-zA-Z]{2,3})/g;
@@ -7,19 +9,11 @@ export function extractUrls(string) {
 }
 
 export const getHost = url => {
-    if (isSoundCloudUrl(url)) {
-        return Hosts.SOUNDCLOUD;
-    } else if (isClypUrl(url)) {
-        return Hosts.CLYP;
-    } else if (isYouTubeUrl(url)) {
-        return Hosts.YOUTUBE;
-    } else if (isBandcampUrl(url)) {
-        return Hosts.BANDCAMP;
+    const host = _.find(Hosts, h => h.urlRegex.test(url));
+    if (!host) {
+        console.log(`Could not find host for following submission: ${url}`)
     }
+    return host;
 };
 export const isSoundCloudUrl = url => url.includes("soundcloud.com");
 export const isValidSubmissionUrl = url => getHost(url) !== undefined;
-
-const isClypUrl = url => url.includes("https://clyp.it") || url.includes("http://clyp.it");
-const isYouTubeUrl = url => (url.includes("youtube.com") || url.includes("youtu.be/")) && !url.includes('playlist?');
-const isBandcampUrl = url => url.includes("bandcamp.com");
