@@ -12,12 +12,10 @@ class ThreadFetcher extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = dispatch => ({
     fetchThreads: () => {
-      dispatch(fetchThreads());
+        dispatch(fetchThreads());
     },
-  };
-};
+});
 
-export default connect(() => {return {}}, mapDispatchToProps)(ThreadFetcher);
+export default connect(() => ({}), mapDispatchToProps)(ThreadFetcher);

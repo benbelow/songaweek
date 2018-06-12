@@ -4,21 +4,18 @@ export const FETCH_THREADS = 'FETCH_THREADS';
 
 const subredditUrl = "https://www.reddit.com/r/songaweek/new.json?sort=new";
 
-export function updateThreads(threads) {
-    return {
-        type: FETCH_THREADS,
-        threads,
-    }
-}
+const updateThreadsAction = (threads) => ({
+    type: FETCH_THREADS,
+    threads,
+});
 
 // Note that the max limit from the reddit api is 100
 export function fetchThreads(limit = 25) {
-    return dispatch => {
-        fetch(`${subredditUrl}&limit=${limit}`, {method: 'get', mode: 'cors'})
-            .then(response => response.json())
-            .then(data => _.map(data.data.children, c => c.data))
-            .then(threads => _.filter(threads, isSubmissionThread))
-            .then(submissionThreads => dispatch(updateThreads(submissionThreads)))
+    return async dispatch => {
+        const response = await fetch(`${subredditUrl}&limit=${limit}`, {method: 'get', mode: 'cors'});
+        const json = await response.json();
+        const threads = json.data.children.map(c => c.data).filter(isSubmissionThread);
+        dispatch(updateThreadsAction(threads));
     }
 }
 
@@ -45,7 +42,7 @@ export function fetchAllThreads() {
 
         console.log(`Total Submission Threads ever: ${submissionThreads.length}`);
 
-        dispatch(updateThreads(submissionThreads));
+        dispatch(updateThreadsAction(submissionThreads));
 
         return submissionThreads;
     }
