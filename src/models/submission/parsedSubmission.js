@@ -62,10 +62,11 @@ export default class ParsedSubmission {
     link() {
         const markdownLink = this.markdownLink();
         const linkInParens = markdownLink.replace(openingSquareBracketsRegex, "");
-        if (! linkInParens.match(/\((.*?)\)/)) {
+        const parensRegex = /\((.*?)\)/;
+        if (! linkInParens.match(parensRegex)) {
             console.log(this, markdownLink);
         }
-        return linkInParens.match(/\((.*?)\)/) && linkInParens.match(/\((.*?)\)/)[1];
+        return linkInParens.match(parensRegex) && linkInParens.match(parensRegex)[1];
     }
 
     title() {

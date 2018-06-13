@@ -53,8 +53,8 @@ class SubmissionThread extends Component {
     if (!this.props.isThemedFilter) {
       return () => true;
     }
-    const submissionModel = new ParsedSubmission(submission.comment);
-    return submissionModel.themed();
+    const parsedSubmission = new ParsedSubmission(submission.comment);
+    return parsedSubmission.themed();
   };
 
   submissions() {
