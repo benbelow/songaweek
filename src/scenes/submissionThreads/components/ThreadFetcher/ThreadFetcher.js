@@ -2,7 +2,7 @@ import {Component} from "react";
 import {connect} from "react-redux";
 import {fetchThreads} from "./ThreadFetcherActions";
 
-class ThreadFetcher extends Component {
+export class ThreadFetcher extends Component {
   componentDidMount() {
     this.props.fetchThreads();
   }
