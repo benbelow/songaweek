@@ -11,7 +11,7 @@ const openingSquareBracketsRegex = /^(\s?)+\[([^\]]+)]/;
 
 //todo refactor this class - chaining is good, but must require the state gets reset or bad stuff happens. 2x classes?
 
-export default class Submission {
+export default class ParsedSubmission {
     constructor(comment) {
         this.comment = _.clone(comment);
         this.formattedComment = _.clone(comment);
@@ -82,8 +82,9 @@ export default class Submission {
 
     genre() {
         const strippedComment = this.stripLink().stripThemedFlag().format();
+        console.log(strippedComment);
         let hasParensGenre = openingBracketsRegex.test(strippedComment);
-        let hasSquareBracketGenre = openingBracketsRegex.test(strippedComment);
+        let hasSquareBracketGenre = openingSquareBracketsRegex.test(strippedComment);
         if (!hasParensGenre && !hasSquareBracketGenre) {
             return undefined;
         }

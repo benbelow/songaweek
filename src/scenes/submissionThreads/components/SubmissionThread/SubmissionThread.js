@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { fetchSubmissions } from "./SubmissionThreadActions";
 import Submission from "../Submission/components/Submission";
-import Submission from "../../../../models/submission/submission";
+import ParsedSubmission from "../../../../models/submission/parsedSubmission";
 import { extractUrls } from "../../../../services/UrlParsingService/UrlParsingService";
 import { isSoundCloudUrl } from "../../../../services/UrlParsingService/UrlParsingService"
 import { generatePlaylist, getPlaylistLinkForThread } from "../../../../integrations/soundcloud/PlaylistGenerator";
@@ -53,7 +53,7 @@ class SubmissionThread extends Component {
     if (!this.props.isThemedFilter) {
       return () => true;
     }
-    const submissionModel = new Submission(submission.comment);
+    const submissionModel = new ParsedSubmission(submission.comment);
     return submissionModel.themed();
   };
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import { Chip, Divider, Paper } from "material-ui";
-import Submission from "../../../../../models/submission/submission";
+import ParsedSubmission from "../../../../../models/submission/parsedSubmission";
 import SubmissionHeader from "./SubmissionHeader";
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Flexbox from 'flexbox-react';
@@ -41,7 +41,7 @@ class Submission extends Component {
     };
 
     render() {
-        const submission = new Submission(this.props.comment);
+        const submission = new ParsedSubmission(this.props.comment);
         const genre = submission.genre();
         const link = submission.markdownLink();
         const description = submission.description();

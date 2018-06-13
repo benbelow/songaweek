@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {database} from "../../integrations/firebase/database";
 import {fetchAllThreads} from "../submissionThreads/components/ThreadFetcher/ThreadFetcherActions";
 import {fetchSubmissions} from "../submissionThreads/components/SubmissionThread/SubmissionThreadActions";
-import Submission from "../../models/submission/submission";
+import ParsedSubmission from "../../models/submission/parsedSubmission";
 
 export const SYNC_DATA = 'SYNC_DATA';
 
@@ -15,7 +15,7 @@ export function syncData() {
             database.ref(`threads/${t.id}`).set(t);
             await dispatch(fetchSubmissions(t.id, t.url))
                 .then(ts => _.each(ts, s => {
-                    const submission = new Submission(s.comment);
+                    const submission = new ParsedSubmission(s.comment);
                     const genre = submission.genre() || null;
                     const link = submission.markdownLink() || null;
                     const description = submission.description() || null;
