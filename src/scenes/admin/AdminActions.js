@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {database} from "../../integrations/firebase/database";
 import {fetchAllThreads} from "../submissionThreads/components/ThreadFetcher/ThreadFetcherActions";
 import {fetchSubmissions} from "../submissionThreads/components/SubmissionThread/SubmissionThreadActions";
-import Formatter from "../submissionThreads/components/Submission/Formatter";
+import Submission from "../../models/submission/submission";
 
 export const SYNC_DATA = 'SYNC_DATA';
 
@@ -15,11 +15,11 @@ export function syncData() {
             database.ref(`threads/${t.id}`).set(t);
             await dispatch(fetchSubmissions(t.id, t.url))
                 .then(ts => _.each(ts, s => {
-                    const formatter = new Formatter(s.comment);
-                    const genre = formatter.genre() || null;
-                    const link = formatter.markdownLink() || null;
-                    const description = formatter.description() || null;
-                    const themed = formatter.themed() || null;
+                    const submission = new Submission(s.comment);
+                    const genre = submission.genre() || null;
+                    const link = submission.markdownLink() || null;
+                    const description = submission.description() || null;
+                    const themed = submission.themed() || null;
                     database.ref(`submissions/${s.commentId}`).set(_.merge({}, s, { genre, link, description, themed }));
                 }))
                 .then(() => console.log(`Finished syncing thread id: ${t.id}`));

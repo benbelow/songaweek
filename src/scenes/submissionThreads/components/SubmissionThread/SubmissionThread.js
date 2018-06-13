@@ -7,8 +7,8 @@ import ReactMarkdown from 'react-markdown';
 import { connect } from "react-redux";
 import _ from "lodash";
 import { fetchSubmissions } from "./SubmissionThreadActions";
-import Submission from "../Submission/Submission";
-import Formatter from "../Submission/Formatter";
+import Submission from "../Submission/components/Submission";
+import Submission from "../../../../models/submission/submission";
 import { extractUrls } from "../../../../services/UrlParsingService/UrlParsingService";
 import { isSoundCloudUrl } from "../../../../services/UrlParsingService/UrlParsingService"
 import { generatePlaylist, getPlaylistLinkForThread } from "../../../../integrations/soundcloud/PlaylistGenerator";
@@ -53,8 +53,8 @@ class SubmissionThread extends Component {
     if (!this.props.isThemedFilter) {
       return () => true;
     }
-    const formatter = new Formatter(submission.comment);
-    return formatter.themed();
+    const submissionModel = new Submission(submission.comment);
+    return submissionModel.themed();
   };
 
   submissions() {

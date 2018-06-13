@@ -11,7 +11,7 @@ const openingSquareBracketsRegex = /^(\s?)+\[([^\]]+)]/;
 
 //todo refactor this class - chaining is good, but must require the state gets reset or bad stuff happens. 2x classes?
 
-export default class Formatter {
+export default class Submission {
     constructor(comment) {
         this.comment = _.clone(comment);
         this.formattedComment = _.clone(comment);

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import { Chip, Divider, Paper } from "material-ui";
-import Formatter from "./Formatter";
+import Submission from "../../../../../models/submission/submission";
 import SubmissionHeader from "./SubmissionHeader";
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Flexbox from 'flexbox-react';
-import { getHost } from '../../../../services/UrlParsingService/UrlParsingService';
+import { getHost } from '../../../../../services/UrlParsingService/UrlParsingService';
 
 function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
@@ -41,10 +41,10 @@ class Submission extends Component {
     };
 
     render() {
-        const formatter = new Formatter(this.props.comment);
-        const genre = formatter.genre();
-        const link = formatter.markdownLink();
-        const description = formatter.description();
+        const submission = new Submission(this.props.comment);
+        const genre = submission.genre();
+        const link = submission.markdownLink();
+        const description = submission.description();
 
         const descriptionSection = () => {
             return (
@@ -75,8 +75,8 @@ class Submission extends Component {
             );
         };
 
-        const themed = formatter.themed();
-        const songTitle = formatter.title();
+        const themed = submission.themed();
+        const songTitle = submission.title();
 
         if (typeof link === 'undefined' || !link) {
             return null;
@@ -89,7 +89,7 @@ class Submission extends Component {
                         title={songTitle}
                         subtitle={this.props.author}
                         imageSrc={getHostIconUrl(link)}
-                        link={formatter.link()}
+                        link={submission.link()}
                         onExpand={() => this.setState({ isExpanded: !this.state.isExpanded })}
                         canExpand={!isEmptyOrSpaces(description)}
                         url={this.props.url}
