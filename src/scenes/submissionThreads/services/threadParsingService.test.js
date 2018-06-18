@@ -1,4 +1,4 @@
-import { description, theme, week } from './threadService';
+import { description, theme, week } from './threadParsingService';
 
 describe('threadService', () => {
     describe('theme', () => {

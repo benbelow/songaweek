@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardHeader, CardText, Divider, RaisedButton } from "material-ui";
 import Flexbox from 'flexbox-react';
-import { description, theme, week } from "../../services/threadService";
+import { description, theme, week } from "../../services/threadParsingService";
 import ReactMarkdown from 'react-markdown';
 import { connect } from "react-redux";
 import _ from "lodash";
