@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import Switch from "react-router/es/Switch";
 import store from '../../redux/store';
 import ThreadFetcher from "../../scenes/submissionThreads/components/ThreadFetcher/ThreadFetcher";
-import SubmissionThreads from "../../scenes/submissionThreads/SubmissionThreads";
+import SubmissionThreads from "../../scenes/submissionThreads/SubmissionThreads/SubmissionThreads";
 import AppHeader from "../AppHeader/AppHeader";
 import Filters from "../Filters/Filters";
 import Users from "../../scenes/users/Users";
