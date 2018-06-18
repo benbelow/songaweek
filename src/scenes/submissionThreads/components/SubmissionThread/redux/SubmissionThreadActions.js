@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import {isValidSubmissionUrl} from "../../../../services/UrlParsingService/UrlParsingService";
-import {extractUrls} from "../../../../services/UrlParsingService/UrlParsingService";
+import {isValidSubmissionUrl} from "../../../../../services/UrlParsingService/UrlParsingService";
+import {extractUrls} from "../../../../../services/UrlParsingService/UrlParsingService";
 
 export const UPDATE_SUBMISSIONS = 'UPDATE_SUBMISSIONS';
 
@@ -10,7 +10,7 @@ const containsValidSubmissionUrl = comment => {
     return _.filter(extractUrls(comment), u => isValidSubmissionUrl(u)).length > 0;
 };
 
-export function updateSubmissions(threadSubmissions) {
+function updateSubmissions(threadSubmissions) {
     return {
         type: UPDATE_SUBMISSIONS,
         threadSubmissions,

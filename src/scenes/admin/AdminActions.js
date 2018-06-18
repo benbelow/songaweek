@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 import {database} from "../../integrations/firebase/database";
-import {fetchAllThreads} from "../submissionThreads/components/ThreadFetcher/ThreadFetcherActions";
-import {fetchSubmissions} from "../submissionThreads/components/SubmissionThread/SubmissionThreadActions";
+import {fetchAllThreads} from "../submissionThreads/components/ThreadFetcher/redux/ThreadFetcherActions";
+import {fetchSubmissions} from "../submissionThreads/components/SubmissionThread/redux/SubmissionThreadActions";
 import ParsedSubmission from "../../models/submission/parsedSubmission";
 
 export const SYNC_DATA = 'SYNC_DATA';

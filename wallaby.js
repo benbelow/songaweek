@@ -14,7 +14,11 @@ module.exports = function (wallaby) {
         files: [
             'src/**/*.+(js|jsx|json|snap|css|less|sass|scss|jpg|jpeg|gif|png|svg)',
             '!src/**/*.test.js?(x)',
-            'node_modules/react-router/**'
+        ],
+
+        filesWithNoCoverageCalculated: [
+            'node_modules/**',
+            'src/**/*.+(json|snap|css|less|sass|scss|jpg|jpeg|gif|png|svg)',
         ],
 
         tests: ['src/**/*.test.js?(x)'],

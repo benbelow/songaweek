@@ -6,7 +6,7 @@ import { description, theme, week } from "../../services/threadParsingService";
 import ReactMarkdown from 'react-markdown';
 import { connect } from "react-redux";
 import _ from "lodash";
-import { fetchSubmissions } from "./SubmissionThreadActions";
+import { fetchSubmissions } from "./redux/SubmissionThreadActions";
 import Submission from "../Submission/components/Submission";
 import ParsedSubmission from "../../../../models/submission/parsedSubmission";
 import { extractUrls } from "../../../../services/UrlParsingService/UrlParsingService";
