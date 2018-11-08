@@ -28,7 +28,7 @@ describe('threadService', () => {
             { title: 'Submissions — Week 12 (Theme: This Is The Theme)', expectedWeek: 'Week 12' },
             { title: 'Submissions — Week 12 No theme', expectedWeek: WEEK_NOT_FOUND },
             // only matches long dash character, not short
-            { title: 'Submissions - Week 13 (theme)', expectedWeek: WEEK_NOT_FOUND },
+            { title: 'Submissions - Week 13 (theme)', expectedWeek: 'Week 13' },
             { title: 'Submissions — Weak 15 (theme)', expectedWeek: 'Weak 15' },
         ].forEach(({ title, expectedWeek }) => it('extracts theme from thread object', () => {
             const thread = { title };

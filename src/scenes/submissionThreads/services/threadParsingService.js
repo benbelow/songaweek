@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const themeRegex = /:(.*?)\)/;
-const weekRegex = /—(.*?)\(/;
+const weekRegex = /(—|-)(.*?)\(/;
 const descriptionRegex = /\*\*\n\n([\s\S]*?)##/;
 
 export function theme(thread) {
@@ -10,7 +10,7 @@ export function theme(thread) {
 }
 
 export function week(thread) {
-    const week = _.get(weekRegex.exec(thread.title), 1);
+    const week = _.get(weekRegex.exec(thread.title), 2);
     return week ? week.trim() : '[week not found]';
 }
 
