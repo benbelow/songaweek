@@ -31,6 +31,10 @@ export function syncNewThreads(existingThreads) {
             await syncThread(t, dispatch);
         });
 
+        // latest thread(s) will still have submissions coming in, so sync these on load too.
+        await syncThread(existingThreads[0], dispatch);
+        await syncThread(existingThreads[1], dispatch);
+
         return {
             type: SYNC_DATA,
         };
