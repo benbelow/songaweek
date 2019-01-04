@@ -1,21 +1,30 @@
-import {Component} from "react";
-import {connect} from "react-redux";
-import {fetchThreads} from "./redux/ThreadFetcherActions";
+import { Component } from "react";
+import { connect } from "react-redux";
+import { fetchThreadsFromDatabase } from "./redux/ThreadFetcherActions";
+import { syncNewThreads } from '../../../admin/AdminActions';
 
 export class ThreadFetcher extends Component {
-  componentDidMount() {
-    this.props.fetchThreads();
-  }
+    async componentDidMount() {
+        await this.props.fetchThreads();
+        await this.props.syncNewThreads(this.props.threads.submissionThreads);
+    }
 
-  render() {
-    return null;
-  }
+    render() {
+        return null;
+    }
 }
 
-const mapDispatchToProps = dispatch => ({
-    fetchThreads: () => {
-        dispatch(fetchThreads());
-    },
+const mapStateToProps = state => ({
+    threads: state.threads,
 });
 
-export default connect(() => ({}), mapDispatchToProps)(ThreadFetcher);
+const mapDispatchToProps = (dispatch) => ({
+    fetchThreads: async () => {
+        await dispatch(fetchThreadsFromDatabase());
+    },
+    syncNewThreads: async (threads) => {
+        await dispatch(syncNewThreads(threads));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThreadFetcher);

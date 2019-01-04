@@ -1,9 +1,12 @@
-export const FETCH_THREADS = 'FETCH_THREADS';
+import _ from 'lodash';
+import {database} from '../../../../../integrations/firebase/database';
+
+export const UPDATE_THREADS = 'UPDATE_THREADS';
 
 const subredditUrl = "https://www.reddit.com/r/songaweek/new.json?sort=new";
 
 const updateThreadsAction = (threads) => ({
-    type: FETCH_THREADS,
+    type: UPDATE_THREADS,
     threads,
 });
 
@@ -17,15 +20,26 @@ export function fetchThreads(limit = 25) {
     };
 }
 
-export function fetchAllThreads() {
+export function fetchThreadsFromDatabase() {
+    return async dispatch => {
+        const threads = _.values((await database.ref('threads').once('value')).val());
+        console.log("fetched from DB");
+        dispatch(updateThreadsAction(threads.sort((a, b) => b.created_utc - a.created_utc)));
+    }
+}
+
+export function fetchAllThreads(sinceThreadId = undefined) {
     return async dispatch => {
         let submissionThreads = [];
         let lastResultsBatch = [];
         let page = 0;
         let after = '';
 
+        let before = sinceThreadId;
+        let beforeParam = () => before ? `&before=${before}` : '';
+
         do {
-            const response = await fetch(`${subredditUrl}&limit=100&count=${page * 100}&after=${after}`, {
+            const response = await fetch(`${subredditUrl}&limit=100&count=${page * 100}&after=${after}${beforeParam()}`, {
                 method: 'get',
                 mode: 'cors'
             });
@@ -36,7 +50,7 @@ export function fetchAllThreads() {
             submissionThreads = [...submissionThreads, ...lastResultsBatch];
             page++;
 
-            console.log(`Fetched a page of (max) 100 threads, of which ${lastResultsBatch.length} were submission threads. `);
+            console.log(`Fetched a page of ${json.data.children.length} thread(s), of which ${lastResultsBatch.length} were submission threads. `);
         } while (
             lastResultsBatch.length !== 0 &&
             after !== null &&
