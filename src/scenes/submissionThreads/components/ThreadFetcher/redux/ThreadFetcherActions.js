@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import {database} from '../../../../../integrations/firebase/database';
+import * as threadRepository from '../../../../../integrations/firebase/threadRepository';
 
 export const UPDATE_THREADS = 'UPDATE_THREADS';
 
@@ -22,7 +23,7 @@ export function fetchThreads(limit = 25) {
 
 export function fetchThreadsFromDatabase() {
     return async dispatch => {
-        const threads = _.values((await database.ref('threads').once('value')).val());
+        const threads = await threadRepository.getAllThreads();
         console.log("fetched from DB");
         dispatch(updateThreadsAction(threads.sort((a, b) => b.created_utc - a.created_utc)));
     }

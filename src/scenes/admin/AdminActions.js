@@ -5,6 +5,8 @@ import {database} from "../../integrations/firebase/database";
 import {fetchAllThreads} from "../submissionThreads/components/ThreadFetcher/redux/ThreadFetcherActions";
 import {fetchSubmissions} from "../submissionThreads/components/SubmissionThread/redux/SubmissionThreadActions";
 import ParsedSubmission from "../../models/submission/parsedSubmission";
+import * as threadRepository from '../../integrations/firebase/threadRepository';
+import * as submissionRepository from '../../integrations/firebase/submissionRepository';
 
 export const SYNC_DATA = 'SYNC_DATA';
 
@@ -42,7 +44,7 @@ export function syncNewThreads(existingThreads) {
 }
 
 async function syncThread(t, dispatch) {
-    database.ref(`threads/${t.id}`).set(t);
+    threadRepository.setThread(t);
     await dispatch(fetchSubmissions(t.id, t.url))
         .then(ts => _.each(ts, s => {
             const submission = new ParsedSubmission(s.comment);
@@ -50,7 +52,7 @@ async function syncThread(t, dispatch) {
             const link = submission.markdownLink() || null;
             const description = submission.description() || null;
             const themed = submission.themed() || null;
-            database.ref(`submissions/${s.commentId}`).set(_.merge({}, s, { genre, link, description, themed }));
+            submissionRepository.setSubmission(_.merge({}, s, { genre, link, description, themed }));
         }))
         .then(() => console.log(`Finished syncing thread id: ${t.id}`));
 }
