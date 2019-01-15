@@ -24,8 +24,6 @@ class Leaderboard extends Component {
     };
 
     render() {
-        const { onlyActiveUsers } = this.state;
-
         return (
             <div>
                 <div style={{

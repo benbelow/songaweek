@@ -8,7 +8,7 @@ export default props => {
                 <img
                     src={b.icon}
                     style={{ height: 30, width: 30, padding: 2 }}
-
+                    alt={b.name}
                 />)}
         </div>);
 }
