@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import 'arraync';
 
-import {database} from "../../integrations/firebase/database";
 import {fetchAllThreads} from "../submissionThreads/components/ThreadFetcher/redux/ThreadFetcherActions";
 import {fetchSubmissions} from "../submissionThreads/components/SubmissionThread/redux/SubmissionThreadActions";
 import ParsedSubmission from "../../models/submission/parsedSubmission";
@@ -52,7 +51,8 @@ async function syncThread(t, dispatch) {
             const link = submission.markdownLink() || null;
             const description = submission.description() || null;
             const themed = submission.themed() || null;
-            submissionRepository.setSubmission(_.merge({}, s, { genre, link, description, themed }));
+            const threadTimeCreated = t.created;
+            submissionRepository.setSubmission(_.merge({}, s, { genre, link, description, themed, threadTimeCreated }));
         }))
         .then(() => console.log(`Finished syncing thread id: ${t.id}`));
 }

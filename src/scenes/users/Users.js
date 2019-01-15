@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 import _ from 'lodash';
-import {Card} from "material-ui";
+import moment from 'moment';
+import { Card } from "material-ui";
 
-import {fetchUsers} from "./UsersActions";
+import { fetchUsers } from "./UsersActions";
 import Badges from './Badges';
 
 class Users extends Component {
@@ -15,20 +16,27 @@ class Users extends Component {
         return (
             <div>
                 <h1>Users</h1>
-                {_.map(_.sortBy(this.users(), 'submissionCount').reverse(), u => {
+                {_.map(_.sortBy(this.users().filter(u => this.submissionsThisYear(u).length > 0), 'submissionCount').reverse(), u => {
                     return (
                         <Card key={u.username}>
                             <div>
                                 <h4>{u.username}</h4>
-                                <div>Total Submissions: {u.submissionCount}</div>
+                                <div>Total Submissions: {this.submissionsThisYear(u).length} ({u.submissionCount})</div>
                                 <div>Total Themed Submissions: {u.themedSubmissionCount}</div>
-                                {this.badgesSection(u)}
+                                {/*{this.badgesSection(u)}*/}
                             </div>
                         </Card>
                     );
                 })}
             </div>
         );
+    };
+
+    submissionsThisYear = user => {
+        if (!user.submissionsThisYear) {
+            user.submissionsThisYear = user.submissions.filter(s => moment.unix(s.threadTimeCreated).year() === moment().year());
+        }
+        return user.submissionsThisYear;
     };
 
     users = () => this.props.users.filter(u => u.submissionCount > 1);
@@ -40,8 +48,8 @@ class Users extends Component {
                 <h3>BADGES</h3>
                 {badges.map(b => (<div>{b.name}</div>))}
             </div>
-        )
-    }
+        );
+    };
 }
 
 const mapStateToProps = state => ({

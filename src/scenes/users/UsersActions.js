@@ -19,6 +19,7 @@ export function fetchUsers() {
             const themedSubmissions = _.filter(submissions, s => s.themed);
             return {
                 username: author,
+                submissions,
                 submissionCount: submissions.length,
                 themedSubmissionCount: themedSubmissions.length,
                 unthemedSubmissionCount: submissions.length - themedSubmissions.length,
