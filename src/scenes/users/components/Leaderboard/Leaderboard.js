@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import _ from 'lodash';
+import { Toggle } from 'material-ui';
+import ReactTable from 'react-table';
 import moment from 'moment';
 
-import { fetchUsers } from "../redux/UsersActions";
-import UserRow from '../UserRow/UserRow';
+import { fetchUsers } from "../../redux/UsersActions";
 import { submissionsThisYear } from '../../services/UserSubmissionAnalyser';
 
 import './Leaderboard.css';
-import { Toggle } from 'material-ui';
+import 'react-table/react-table.css';
+import AccoladeCell from '../AccoladeCell/AccoladeCell';
+import Badges from '../../Badges';
+import YearBadges from '../../YearBadges';
 
 class Leaderboard extends Component {
     componentDidMount() {
@@ -20,6 +24,8 @@ class Leaderboard extends Component {
     };
 
     render() {
+        const { onlyActiveUsers } = this.state;
+
         return (
             <div>
                 <div style={{
@@ -29,7 +35,7 @@ class Leaderboard extends Component {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <p>Show submissions from all time</p>
+                    <p>Only show this year's users</p>
                     <Toggle
                         style={{ width: 30 }}
                         onToggle={() => this.setState({ onlyActiveUsers: !this.state.onlyActiveUsers })}
@@ -37,18 +43,46 @@ class Leaderboard extends Component {
                     />
                 </div>
 
-                <table>
-                    <tr>
-                        <th>Username</th>
-                        <th>{moment().year()} Submissions</th>
-                        <th>Total Submissions</th>
-                        <th>Total Themed submissions</th>
-                        <th>Accolades</th>
-                    </tr>
-                    {_.map(_.sortBy(this.users(), ['submissionsThisYear', 'user.submissionCount']).reverse(), u => {
-                        return <UserRow user={u.user} submissionsThisYear={u.submissionsThisYear}/>;
-                    })}
-                </table>
+                <ReactTable
+                    sortable
+                    filterable
+                    defaultSortDesc
+                    defaultPageSize={20}
+                    columns={[
+                        { Header: 'Username', accessor: 'username', defaultSortDesc: false },
+                        {
+                            Header: `Submissions in ${moment().year()}`,
+                            id: 'yearlySubs',
+                            accessor: u => u.submissionsThisYear.length,
+                        },
+                        {
+                            Header: 'Submissions',
+                            accessor: 'submissionCount',
+                        },
+                        { Header: 'Themed Submissions', accessor: 'themedSubmissionCount' },
+                        {
+                            Header: 'Years', Cell: row => {
+                                return (
+                                    <AccoladeCell
+                                        user={row.original}
+                                        badges={YearBadges}
+                                    />
+                                );
+                            }
+                        },
+                        {
+                            Header: 'Accolades', Cell: row => {
+                                return (
+                                    <AccoladeCell
+                                        user={row.original}
+                                        badges={Badges}
+                                    />
+                                );
+                            }
+                        },
+                    ]}
+                    data={_.orderBy(this.users(), ['submissionsThisYear', 'submissionCount'], ['desc', 'desc'])}
+                />
             </div>
         );
     };
@@ -56,11 +90,11 @@ class Leaderboard extends Component {
     users = () => {
         const { users } = this.props;
         const analysedUsers = users.map(u => ({
-            user: u,
+            ...u,
             submissionsThisYear: submissionsThisYear(u)
         }));
         return this.state.onlyActiveUsers ? analysedUsers.filter(u => u.submissionsThisYear.length > 0) : analysedUsers;
-    }
+    };
 }
 
 const mapStateToProps = state => ({

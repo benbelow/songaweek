@@ -3,7 +3,7 @@ import threads from '../scenes/submissionThreads/components/ThreadFetcher/redux/
 import submissionThread from '../scenes/submissionThreads/components/SubmissionThread/redux/SubmissionThreadReducer';
 import filters from '../components/Filters/FilterReducer';
 import header from '../components/AppHeader/HeaderReducer';
-import users from '../scenes/users/components/redux/UsersReducer';
+import users from '../scenes/users/redux/UsersReducer';
 
 export default combineReducers({
     threads,

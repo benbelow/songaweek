@@ -1,7 +1,10 @@
+import fullYear from '../../assets/fullYear.png';
+
 export default [
     {
         name: 'Full Year',
         test: (user) => user.submissionCount >= 52,
+        icon: fullYear
     },
     {
         name: 'Double Year',
@@ -30,5 +33,5 @@ export default [
     {
         name: 'Half and half',
         test: (user) => user.submissionCount >= 10 && Math.abs(user.themedSubmissionCount - user.unthemedSubmissionCount) < user.submissionCount / 10
-    }
-]
+    },
+];

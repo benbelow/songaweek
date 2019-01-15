@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { getAllSubmissions } from '../../../../integrations/firebase/submissionRepository';
+import { getAllSubmissions } from '../../../integrations/firebase/submissionRepository';
 
 export const UPDATE_USERS_LIST = 'UPDATE_USERS_LIST';
 
