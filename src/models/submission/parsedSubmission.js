@@ -83,7 +83,6 @@ export default class ParsedSubmission {
 
     genre() {
         const strippedComment = this.stripLink().stripThemedFlag().format();
-        console.log(strippedComment);
         let hasParensGenre = openingBracketsRegex.test(strippedComment);
         let hasSquareBracketGenre = openingSquareBracketsRegex.test(strippedComment);
         if (!hasParensGenre && !hasSquareBracketGenre) {

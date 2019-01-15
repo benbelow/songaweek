@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
-import { FETCH_THREADS, fetchAllThreads, fetchThreads } from './ThreadFetcherActions';
+import { UPDATE_THREADS, fetchAllThreads, fetchThreads } from './ThreadFetcherActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -47,12 +47,12 @@ describe('thread fetcher actions', () => {
     });
 
     describe('fetchThreads', () => {
-        it('dispatches FETCH_THREADS action', async () => {
+        it('dispatches UPDATE_THREADS action', async () => {
             fetchMock.getOnce('*', responseBuilder.withThreads([submissionThreadTitle]).build());
 
             await store.dispatch(fetchThreads());
 
-            expect(store.getActions().map(a => a.type)).toContain(FETCH_THREADS);
+            expect(store.getActions().map(a => a.type)).toContain(UPDATE_THREADS);
         });
 
         it('only fetches submission threads', async () => {
@@ -74,12 +74,12 @@ describe('thread fetcher actions', () => {
     });
 
     describe('fetchAllThreads', () => {
-        it('dispatches FETCH_THREADS action', async () => {
+        it('dispatches UPDATE_THREADS action', async () => {
             fetchMock.getOnce('*', responseBuilder.withThreads([submissionThreadTitle]).build());
 
             await store.dispatch(fetchAllThreads());
 
-            expect(store.getActions().map(a => a.type)).toContain(FETCH_THREADS);
+            expect(store.getActions().map(a => a.type)).toContain(UPDATE_THREADS);
         });
 
         it('fetches multiple pages of results', async () => {

@@ -28,6 +28,7 @@ export class SubmissionThread extends Component {
             playlistLink: undefined,
             shouldShowPlaylist: false,
             loadingPlaylist: false,
+            hasFetchedSubmissions: false,
         };
         this.submissions = this.submissions.bind(this);
         this.fetchSubmissions = this.fetchSubmissions.bind(this);
@@ -70,8 +71,9 @@ export class SubmissionThread extends Component {
     }
 
     fetchSubmissions() {
-        if (!this.submissions()) {
+        if (!this.state.hasFetchedSubmissions) {
             this.props.fetchSubmissions(this.props.thread.id, this.props.thread.url);
+            this.setState({ hasFetchedSubmissions: true });
         }
     }
 
