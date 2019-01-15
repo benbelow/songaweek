@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Card } from "material-ui";
 
 import Badges from '../../Badges';
-import { submissionsThisYear } from '../../services/UserSubmissionAnalyser';
 
 class UserRow extends Component {
     render() {
-        const { user } = this.props;
+        const { user, submissionsThisYear } = this.props;
 
         return (
-            <Card key={user.username}>
-                <div>
-                    <h4>{user.username}</h4>
-                    <div>Total Submissions: {submissionsThisYear(user).length} ({user.submissionCount})</div>
-                    <div>Total Themed Submissions: {user.themedSubmissionCount}</div>
+            <tr key={user.username}>
+                    <td>{user.username}</td>
+                    <td>{submissionsThisYear.length}</td>
+                    <td>{user.submissionCount}</td>
+                    <td>{user.themedSubmissionCount}</td>
                     {/*{this.badgesSection(u)}*/}
-                </div>
-            </Card>
+            </tr>
         );
     }
 

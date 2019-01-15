@@ -12,11 +12,24 @@ class Leaderboard extends Component {
     }
 
     render() {
+        const analysedUsers = this.users().map(u => {
+            return {
+                user: u,
+                submissionsThisYear: submissionsThisYear(u)
+            }
+        });
+
         return (
             <div>
                 <h1>Users</h1>
-                {_.map(_.sortBy(this.users().filter(u => submissionsThisYear(u).length > 0), 'submissionCount').reverse(), u => {
-                    return <UserRow user={u}/>
+                <tr>
+                    <th>Username</th>
+                    <th>Yearly Submissions</th>
+                    <th>Total Submissions</th>
+                    <th>Total Themed submissions</th>
+                </tr>
+                {_.map(_.sortBy(analysedUsers.filter(u => u.submissionsThisYear.length > 0), ['submissionsThisYear', 'user.submissionCount']).reverse(), u => {
+                    return <UserRow user={u.user} submissionsThisYear={u.submissionsThisYear}/>;
                 })}
             </div>
         );
