@@ -10,7 +10,7 @@ import ThreadFetcher from "../../scenes/submissionThreads/components/ThreadFetch
 import SubmissionThreads from "../../scenes/submissionThreads/SubmissionThreads/SubmissionThreads";
 import AppHeader from "../AppHeader/AppHeader";
 import Filters from "../Filters/Filters";
-import Users from "../../scenes/users/Users";
+import Users from "../../scenes/users/components/Leaderboard/Leaderboard";
 import Admin from "../../scenes/admin/Admin";
 import SoundcloudCallback from "../SoundcloudCallback/SoundcloudCallback";
 
