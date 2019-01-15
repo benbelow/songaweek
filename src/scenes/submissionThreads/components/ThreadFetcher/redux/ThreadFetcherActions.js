@@ -1,5 +1,3 @@
-import _ from 'lodash';
-import {database} from '../../../../../integrations/firebase/database';
 import * as threadRepository from '../../../../../integrations/firebase/threadRepository';
 
 export const UPDATE_THREADS = 'UPDATE_THREADS';
