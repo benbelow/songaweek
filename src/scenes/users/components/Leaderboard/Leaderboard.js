@@ -1,41 +1,66 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import _ from 'lodash';
+import moment from 'moment';
 
 import { fetchUsers } from "../redux/UsersActions";
 import UserRow from '../UserRow/UserRow';
 import { submissionsThisYear } from '../../services/UserSubmissionAnalyser';
+
+import './Leaderboard.css';
+import { Toggle } from 'material-ui';
 
 class Leaderboard extends Component {
     componentDidMount() {
         this.props.fetchUsers();
     }
 
-    render() {
-        const analysedUsers = this.users().map(u => {
-            return {
-                user: u,
-                submissionsThisYear: submissionsThisYear(u)
-            }
-        });
+    state = {
+        onlyActiveUsers: true,
+    };
 
+    render() {
         return (
             <div>
-                <h1>Users</h1>
-                <tr>
-                    <th>Username</th>
-                    <th>Yearly Submissions</th>
-                    <th>Total Submissions</th>
-                    <th>Total Themed submissions</th>
-                </tr>
-                {_.map(_.sortBy(analysedUsers.filter(u => u.submissionsThisYear.length > 0), ['submissionsThisYear', 'user.submissionCount']).reverse(), u => {
-                    return <UserRow user={u.user} submissionsThisYear={u.submissionsThisYear}/>;
-                })}
+                <div style={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <p>Show submissions from all time</p>
+                    <Toggle
+                        style={{ width: 30 }}
+                        onToggle={() => this.setState({ onlyActiveUsers: !this.state.onlyActiveUsers })}
+                        toggled={this.state.onlyActiveUsers}
+                    />
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Username</th>
+                        <th>{moment().year()} Submissions</th>
+                        <th>Total Submissions</th>
+                        <th>Total Themed submissions</th>
+                        <th>Accolades</th>
+                    </tr>
+                    {_.map(_.sortBy(this.users(), ['submissionsThisYear', 'user.submissionCount']).reverse(), u => {
+                        return <UserRow user={u.user} submissionsThisYear={u.submissionsThisYear}/>;
+                    })}
+                </table>
             </div>
         );
     };
 
-    users = () => this.props.users.filter(u => u.submissionCount > 1);
+    users = () => {
+        const { users } = this.props;
+        const analysedUsers = users.map(u => ({
+            user: u,
+            submissionsThisYear: submissionsThisYear(u)
+        }));
+        return this.state.onlyActiveUsers ? analysedUsers.filter(u => u.submissionsThisYear.length > 0) : analysedUsers;
+    }
 }
 
 const mapStateToProps = state => ({
