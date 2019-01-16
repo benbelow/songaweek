@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 
 export default props => {
     const earnedBadges = props.badges.filter(b => b.test(props.user));
@@ -9,6 +10,8 @@ export default props => {
                     src={b.icon}
                     style={{ height: 30, width: 30, padding: 2 }}
                     alt={b.name}
+                    data-tip={b.name}
                 />)}
+            <ReactTooltip/>
         </div>);
 }
