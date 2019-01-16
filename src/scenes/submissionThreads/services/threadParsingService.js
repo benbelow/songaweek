@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 
 const themeRegex = /:(.*?)\)/;
 const weekRegex = /(—|-)(.*?)\(/;
@@ -10,7 +11,12 @@ export function theme(thread) {
 }
 
 export function week(thread) {
-    const week = _.get(weekRegex.exec(thread.title), 2);
+    const threadYear = moment.unix(thread.created).year();
+    const isThisYear = threadYear === moment().year();
+
+    console.log(thread)
+    const weekFromTitle = _.get(weekRegex.exec(thread.title), 2);
+    const week = isThisYear ? weekFromTitle : `${weekFromTitle} (${threadYear})`;
     return week ? week.trim() : '[week not found]';
 }
 

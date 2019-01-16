@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Button } from '@material-ui/core/es/index';
+import { FlatButton } from 'material-ui';
 
 import SubmissionThread from "../components/SubmissionThread/SubmissionThread";
 
@@ -21,12 +21,12 @@ export class SubmissionThreads extends Component {
                     />
                 )}
 
-                <Button
+                <FlatButton
                     onClick={() => this.setState({ threadsToDisplay: this.state.threadsToDisplay + 10 })}
                     style={{ marginBottom: 200, backgroundColor: '#AAAAAA' }}
                 >
                     LOAD MORE THREADS
-                </Button>
+                </FlatButton>
             </div>
         ) : <div>Loading threads...</div>;
     };

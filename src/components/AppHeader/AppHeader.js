@@ -28,7 +28,6 @@ class AppHeader extends Component {
     appVersion = version;
 
     render() {
-        console.log(this.props);
         return (
             <div className="App-header">
                 <Flexbox flexDirection='row' justifyContent='space-between'>
