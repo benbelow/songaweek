@@ -1,12 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import { Button } from '@material-ui/core/es/index';
+import { withRouter } from 'react-router-dom';
 
-import {toggleMenu} from "./HeaderActions";
+import { toggleMenu } from "./HeaderActions";
 import snoo from '../../assets/snoo.png';
 import '../App/App.css';
-import { version } from '../../../package.json'
+import { version } from '../../../package.json';
+
+const navButtonStyle = {
+    background: 'white',
+    marginLeft: 16,
+    marginRight: 16,
+    height: '50%',
+    marginTop: 'auto',
+    marginBottom: 'auto'
+};
 
 class AppHeader extends Component {
     static propTypes = {
@@ -17,6 +28,7 @@ class AppHeader extends Component {
     appVersion = version;
 
     render() {
+        console.log(this.props);
         return (
             <div className="App-header">
                 <Flexbox flexDirection='row' justifyContent='space-between'>
@@ -25,8 +37,18 @@ class AppHeader extends Component {
                         <h2 onClick={() => window.open('https://www.reddit.com/r/songaweek/')} className='App-title'>
                             The Song A Week Challenge
                         </h2>
+                        <div style={{ display: 'flex', paddingLeft: 25, justifyContent: 'center' }}>
+                            <Button style={navButtonStyle}
+                                    onClick={() => this.props.history.push('/threads')}>
+                                WEEKS
+                            </Button>
+                            <Button style={navButtonStyle}
+                                    onClick={() => this.props.history.push('/users')}>
+                                USERS
+                            </Button>
+                        </div>
                     </Flexbox>
-                    <p style={{fontSize: 10}}>v{this.appVersion}</p>
+                    <p style={{ fontSize: 10 }}>v{this.appVersion}</p>
                 </Flexbox>
             </div>
         );
@@ -36,7 +58,7 @@ class AppHeader extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         toggleMenu: () => dispatch(toggleMenu()),
-    }
+    };
 };
 
-export default connect(null, mapDispatchToProps)(AppHeader);
+export default connect(null, mapDispatchToProps)(withRouter(AppHeader));
