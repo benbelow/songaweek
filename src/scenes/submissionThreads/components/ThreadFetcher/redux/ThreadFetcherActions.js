@@ -56,7 +56,7 @@ export function fetchAllThreads(sinceThreadId = undefined) {
             page < 50
             );
 
-        console.log(`Total Submission Threads ever: ${submissionThreads.length}`);
+        console.log(`Total Submission Threads fetched: ${submissionThreads.length}`);
 
         dispatch(updateThreadsAction(submissionThreads));
 
