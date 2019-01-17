@@ -15,6 +15,7 @@ import Users from "../../scenes/users/components/Leaderboard/Leaderboard";
 import Admin from "../../scenes/admin/Admin";
 import StatsPage from '../../scenes/stats/StatsPage';
 import SoundcloudCallback from "../SoundcloudCallback/SoundcloudCallback";
+import FeedbackPage from '../../scenes/feedback/FeedbackPage';
 
 import './App.css';
 
@@ -34,6 +35,7 @@ class App extends Component {
                                     <Route path='/users' component={Users}/>
                                     <Route path='/admin' component={Admin}/>
                                     <Route path='/stats' component={StatsPage}/>
+                                    <Route path='/feedback' component={FeedbackPage}/>
                                     <Route path="/callback.html" component={SoundcloudCallback}/>
                                     <Redirect from='*' to='threads'/>
                                 </Switch>

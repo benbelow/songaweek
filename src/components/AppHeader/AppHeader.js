@@ -30,7 +30,7 @@ class AppHeader extends Component {
                         <div style={{ display: 'flex', paddingLeft: 25, justifyContent: 'center' }}>
                             <NavButton value="WEEKS" path="threads" />
                             <NavButton value="USERS" path="users" />
-                            <NavButton value="FEEDBACK" path="stats" />
+                            <NavButton value="FEEDBACK" path="feedback" />
                             <NavButton value="STATS" path="stats" />
                         </div>
                     </Flexbox>
