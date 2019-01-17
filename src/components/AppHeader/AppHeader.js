@@ -2,22 +2,13 @@ import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import { FlatButton } from 'material-ui';
 import { withRouter } from 'react-router-dom';
+import NavButton from './NavButton';
 
 import { toggleMenu } from "./HeaderActions";
 import snoo from '../../assets/snoo.png';
 import '../App/App.css';
 import { version } from '../../../package.json';
-
-const navButtonStyle = {
-    backgroundColor: 'white',
-    marginLeft: 16,
-    marginRight: 16,
-    height: '50%',
-    marginTop: 'auto',
-    marginBottom: 'auto'
-};
 
 class AppHeader extends Component {
     static propTypes = {
@@ -37,18 +28,10 @@ class AppHeader extends Component {
                             The Song A Week Challenge
                         </h2>
                         <div style={{ display: 'flex', paddingLeft: 25, justifyContent: 'center' }}>
-                            <FlatButton style={navButtonStyle}
-                                    onClick={() => this.props.history.push('/threads')}>
-                                WEEKS
-                            </FlatButton>
-                            <FlatButton style={navButtonStyle}
-                                    onClick={() => this.props.history.push('/users')}>
-                                USERS
-                            </FlatButton>
-                            <FlatButton style={navButtonStyle}
-                                    onClick={() => this.props.history.push('/stats')}>
-                                STATS
-                            </FlatButton>
+                            <NavButton value="WEEKS" path="threads" />
+                            <NavButton value="USERS" path="users" />
+                            <NavButton value="FEEDBACK" path="stats" />
+                            <NavButton value="STATS" path="stats" />
                         </div>
                     </Flexbox>
                     <p style={{ fontSize: 10 }}>v{this.appVersion}</p>
