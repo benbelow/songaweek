@@ -11,8 +11,8 @@ import { submissionsThisYear } from '../../services/UserSubmissionAnalyser';
 import './Leaderboard.css';
 import 'react-table/react-table.css';
 import AccoladeCell from '../AccoladeCell/AccoladeCell';
-import Badges from '../../Badges';
-import YearBadges from '../../YearBadges';
+import Badges from '../../content/Badges';
+import YearBadges from '../../content/YearBadges';
 
 class Leaderboard extends Component {
     componentDidMount() {

@@ -45,6 +45,10 @@ class AppHeader extends Component {
                                     onClick={() => this.props.history.push('/users')}>
                                 USERS
                             </FlatButton>
+                            <FlatButton style={navButtonStyle}
+                                    onClick={() => this.props.history.push('/stats')}>
+                                STATS
+                            </FlatButton>
                         </div>
                     </Flexbox>
                     <p style={{ fontSize: 10 }}>v{this.appVersion}</p>

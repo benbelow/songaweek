@@ -13,6 +13,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import Filters from "../Filters/Filters";
 import Users from "../../scenes/users/components/Leaderboard/Leaderboard";
 import Admin from "../../scenes/admin/Admin";
+import StatsPage from '../../scenes/stats/StatsPage';
 import SoundcloudCallback from "../SoundcloudCallback/SoundcloudCallback";
 
 import './App.css';
@@ -32,6 +33,7 @@ class App extends Component {
                                     <Route path='/threads' component={SubmissionThreads}/>
                                     <Route path='/users' component={Users}/>
                                     <Route path='/admin' component={Admin}/>
+                                    <Route path='/stats' component={StatsPage}/>
                                     <Route path="/callback.html" component={SoundcloudCallback}/>
                                     <Redirect from='*' to='threads'/>
                                 </Switch>

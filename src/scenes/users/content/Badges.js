@@ -1,9 +1,9 @@
-import fullYear from '../../assets/fullYear.png';
-import doubleYear from '../../assets/doubleYear.png';
-import themedYear from '../../assets/themedYear.png';
-import regular from '../../assets/regular.png';
-import halfAndHalf from '../../assets/halfAndHalf.png';
-import halfway from '../../assets/halfway.png';
+import fullYear from '../../../assets/fullYear.png';
+import doubleYear from '../../../assets/doubleYear.png';
+import themedYear from '../../../assets/themedYear.png';
+import regular from '../../../assets/regular.png';
+import halfAndHalf from '../../../assets/halfAndHalf.png';
+import halfway from '../../../assets/halfway.png';
 
 export default [
     {

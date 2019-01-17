@@ -1,19 +1,19 @@
-import { submissionsInYear, submissionYears } from './services/UserSubmissionAnalyser';
+import { submissionsInYear, submissionYears } from '../services/UserSubmissionAnalyser';
 
-import icon2019bw from '../../assets/2019bw.png';
-import icon2019c from '../../assets/2019c.png';
-import icon2020bw from '../../assets/2020bw.png';
-import icon2020c from '../../assets/2020c.png';
-import icon2018bw from '../../assets/2018bw.png';
-import icon2018c from '../../assets/2018c.png';
-import icon2017bw from '../../assets/2017bw.png';
-import icon2017c from '../../assets/2017c.jpg';
-import icon2016bw from '../../assets/2016bw.png';
-import icon2016c from '../../assets/2016c.png';
-import icon2015bw from '../../assets/2015bw.png';
-import icon2015c from '../../assets/2015c.png';
-import icon2014bw from '../../assets/2014bw.png';
-import icon2014c from '../../assets/2014c.png';
+import icon2019bw from '../../../assets/2019bw.png';
+import icon2019c from '../../../assets/2019c.png';
+import icon2020bw from '../../../assets/2020bw.png';
+import icon2020c from '../../../assets/2020c.png';
+import icon2018bw from '../../../assets/2018bw.png';
+import icon2018c from '../../../assets/2018c.png';
+import icon2017bw from '../../../assets/2017bw.png';
+import icon2017c from '../../../assets/2017c.jpg';
+import icon2016bw from '../../../assets/2016bw.png';
+import icon2016c from '../../../assets/2016c.png';
+import icon2015bw from '../../../assets/2015bw.png';
+import icon2015c from '../../../assets/2015c.png';
+import icon2014bw from '../../../assets/2014bw.png';
+import icon2014c from '../../../assets/2014c.png';
 
 const completedYear = (user, year) => submissionsInYear(user, year).length >= 52;
 
