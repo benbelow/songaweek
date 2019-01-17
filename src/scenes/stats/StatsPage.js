@@ -12,7 +12,6 @@ export class StatsPage extends Component {
     render() {
         const { users } = this.props;
         const allSubmissions = _.flatten(users.map(u => u.submissions));
-        console.log(allSubmissions[0]);
         const weeks = _.groupBy(allSubmissions, "threadId");
 
         return (
