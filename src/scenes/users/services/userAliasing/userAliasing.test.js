@@ -29,16 +29,4 @@ describe('aliasUserData', () => {
 
         expect(aliasedData.find(u => u.username === newUsername).submissions.length).toBe(6);
     });
-
-    it('updates submission count', () => {
-        const oldUsername = "old";
-        const newUsername = "new";
-        mockAliases({ [newUsername]: oldUsername });
-        const newData = { username: newUsername, submissions: [1, 2, 3] };
-        const oldData = { username: oldUsername, submissions: [4, 5, 6] };
-
-        const aliasedData = aliasUserData([oldData, newData]);
-
-        expect(aliasedData.find(u => u.username === newUsername).submissionCount).toBe(6);
-    });
 });

@@ -87,10 +87,17 @@ class Leaderboard extends Component {
 
     users = () => {
         const { users } = this.props;
-        const analysedUsers = users.map(u => ({
-            ...u,
-            submissionsThisYear: submissionsThisYear(u)
-        }));
+        const analysedUsers = users.map(u => {
+                const themedSubmissions = _.filter(u.submissions, s => s.themed);
+                return {
+                    ...u,
+                    submissionsThisYear: submissionsThisYear(u),
+                    submissionCount: u.submissions.length,
+                    themedSubmissionCount: themedSubmissions.length,
+                    unthemedSubmissionCount: u.submissions.length - themedSubmissions.length,
+                };
+            }
+        );
         return this.state.onlyActiveUsers ? analysedUsers.filter(u => u.submissionsThisYear.length > 0) : analysedUsers;
     };
 }

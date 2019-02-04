@@ -18,13 +18,9 @@ export function fetchUsers() {
     return async dispatch => {
         const s = await getAllSubmissions();
         const userData = _.map(_.groupBy(s.val(), 'author'), (submissions, author) => {
-            const themedSubmissions = _.filter(submissions, s => s.themed);
             return {
                 username: author,
                 submissions,
-                submissionCount: submissions.length,
-                themedSubmissionCount: themedSubmissions.length,
-                unthemedSubmissionCount: submissions.length - themedSubmissions.length,
             };
         });
 
