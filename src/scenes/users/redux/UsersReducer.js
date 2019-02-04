@@ -1,4 +1,4 @@
-import {UPDATE_USERS_LIST} from "./UsersActions";
+import { UPDATE_USERS_LIST } from "./UsersActions";
 
 const initialState = {
     users: [],
@@ -10,7 +10,7 @@ const UsersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: action.users,
-            }
+            };
         default:
             return state;
     }

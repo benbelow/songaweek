@@ -1,5 +1,7 @@
 import _ from 'lodash';
+
 import { getAllSubmissions } from '../../../integrations/firebase/submissionRepository';
+import { aliasUserData } from '../services/userAliasing/userAliasing';
 
 export const UPDATE_USERS_LIST = 'UPDATE_USERS_LIST';
 
@@ -25,6 +27,10 @@ export function fetchUsers() {
                 unthemedSubmissionCount: submissions.length - themedSubmissions.length,
             };
         });
-        dispatch(updateUsers(userData.filter(ud => ud.username !== DELETED_USER_USERNAME)));
+
+        const aliasedUsers = aliasUserData(userData);
+        const filteredUsers = aliasedUsers.filter(ud => ud.username !== DELETED_USER_USERNAME);
+
+        dispatch(updateUsers(filteredUsers));
     };
 }
