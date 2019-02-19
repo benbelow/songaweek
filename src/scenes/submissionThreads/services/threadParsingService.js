@@ -14,7 +14,6 @@ export function week(thread) {
   const threadYear = moment.unix(thread.created).year();
   const isThisYear = threadYear === moment().year();
 
-  console.log(thread);
   const weekFromTitle = _.get(weekRegex.exec(thread.title), 2);
   const week = isThisYear ? weekFromTitle : `${weekFromTitle} (${threadYear})`;
   return week ? week.trim() : '[week not found]';

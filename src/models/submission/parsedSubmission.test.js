@@ -16,6 +16,8 @@ describe('parsed submission', () => {
       // { comment: '[Themed](as a markdown http://www.link.com) (Not themed)', themed: false},
       { comment: '[name](link)(themed)(genre)', themed: true },
       { comment: '[name](link)(genre) somewhere in the description [Themed]', themed: true },
+      { comment: '[Rainy Jam](https://soundcloud.com/user-535328441/rainy-jam) (Folk/Country) \\[Themed\\]', themed: true },
+      { comment: '[Rainy Jam](https://soundcloud.com/user-535328441/rainy-jam) (Folk/Country) \\(Themed\\)', themed: true },
     ].forEach(({ comment, themed }) => {
       it('extracts themed information from comment', () => {
         const submission = new ParsedSubmission(comment);

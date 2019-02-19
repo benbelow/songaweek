@@ -3,8 +3,9 @@ import _ from 'lodash';
 const markdownLinkRegex = /\[(.*?)\]\(.*?\)/;
 const markdownLinkWithSpaceRegex = /\[(.*?)\] \(.*?\)/;
 const markdownLinkWithSpaceRegexGlobal = /\[(.*?)\] \(.*?\)/;
-const themedRegex = /(\[|\()Themed(]|\))/i;
-const notThemedRegex = /(\[|\()Not Themed(]|\))/i;
+
+const themedRegex = /(\[|\(|(\\\[)|(\\\())Themed(]|\)|(\\\])|(\\\)))/i;
+const notThemedRegex = /(\[|\(|(\\\[)|(\\\())Not Themed(]|\)|(\\\])|(\\\)))/i;
 
 const openingBracketsRegex = /^(\s?)+\(([^)]+)\)/;
 const openingSquareBracketsRegex = /^(\s?)+\[([^\]]+)]/;
@@ -78,7 +79,13 @@ export default class ParsedSubmission {
   }
 
   description() {
-    return this.stripLink().stripThemedFlag().stripGenre().fixMarkdownLinkWithSpace().format();
+    return this
+      .stripLink()
+      .stripThemedFlag()
+      .stripGenre()
+      .fixMarkdownLinkWithSpace()
+      .format()
+      .replace(/&amp;#x200B;/g, '');
   }
 
   genre() {
