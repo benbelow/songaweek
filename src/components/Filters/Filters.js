@@ -34,20 +34,31 @@ class Filters extends Component {
 
   render() {
     return (
-      <div style={{backgroundColor: '#444', position: 'sticky', top: '0', zIndex: 99, display: 'flex', justifyContent: 'left'}}>
-        <Toggle style={{ margin: '4px', width: '25%', marginRight: 24 }} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Themed Only" onToggle={this.onThemedToggle}/>
-        <div style={{backgroundColor: '#333', width: 3}} />
-        <Toggle style={{ margin: '4px', width: '25%', marginRight: 24}} labelStyle={{color: this.props.muiTheme.palette.primary1Color}} label="Private Playlists?" onToggle={this.onPrivateToggle}/>
-        <div style={{backgroundColor: '#333', width: 3}} />
+      <div style={{
+        backgroundColor: '#444',
+        position: 'sticky',
+        top: '0',
+        zIndex: 99,
+        display: 'flex',
+        justifyContent: 'left'
+      }}>
+        <Toggle style={{ margin: '4px', width: '25%', marginRight: 24 }}
+                labelStyle={{ color: this.props.muiTheme.palette.primary1Color }} label="Themed Only"
+                onToggle={this.onThemedToggle}/>
+        <div style={{ backgroundColor: '#333', width: 3 }}/>
+        <Toggle style={{ margin: '4px', width: '25%', marginRight: 24 }}
+                labelStyle={{ color: this.props.muiTheme.palette.primary1Color }} label="Private Playlists?"
+                onToggle={this.onPrivateToggle}/>
+        <div style={{ backgroundColor: '#333', width: 3 }}/>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
     themed: state.filters.themed,
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -58,7 +69,7 @@ const mapDispatchToProps = dispatch => {
     disableFilter: filterName => {
       dispatch(disableFilter(filterName));
     }
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(muiThemeable()(Filters));

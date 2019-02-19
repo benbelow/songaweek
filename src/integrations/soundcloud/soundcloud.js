@@ -2,17 +2,17 @@ import SC from 'soundcloud';
 
 export function signIn() {
   // initiate auth popup
-  SC.connect().then(function() {
+  SC.connect().then(function () {
     return SC.get('/me');
   })
-    .then(function(me) {
+    .then(function (me) {
       console.log("Logged in as " + me.username);
     });
 }
 
 export function setup() {
   if (window.location.hostname === "localhost") {
-    console.log("setting up soundcloud...")
+    console.log("setting up soundcloud...");
     SC.initialize({
       client_id: 'e2faf70422dd2a5bbc0240ade53aab4f',
       redirect_uri: 'http://localhost:8088/callback.html'
@@ -25,4 +25,4 @@ export function setup() {
     });
   }
 }
-;
+

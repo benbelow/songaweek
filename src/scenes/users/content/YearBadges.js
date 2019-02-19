@@ -20,74 +20,74 @@ const completedYear = (user, year) => submissionsInYear(user, year).length >= 52
 const participant = (user, year) => submissionYears(user).includes(year) && !completedYear(user, year);
 
 export default [
-    {
-        name: '2014 Participant',
-        test: (user) => participant(user, 2014),
-        icon: icon2014bw
-    },
-    {
-        name: '2014 Complete!',
-        test: (user) => completedYear(user, 2014),
-        icon: icon2014c
-    },
-    {
-        name: '2015 Participant',
-        test: (user) => participant(user, 2015),
-        icon: icon2015bw
-    },
-    {
-        name: '2015 Complete!',
-        test: (user) => completedYear(user, 2015),
-        icon: icon2015c
-    },
-    {
-        name: '2016 Participant',
-        test: (user) => participant(user, 2016),
-        icon: icon2016bw
-    },
-    {
-        name: '2016 Complete!',
-        test: (user) => completedYear(user, 2016),
-        icon: icon2016c
-    },
-    {
-        name: '2017 Participant',
-        test: (user) => participant(user, 2017),
-        icon: icon2017bw
-    },
-    {
-        name: '2017 Complete!',
-        test: (user) => completedYear(user, 2017),
-        icon: icon2017c
-    },
-    {
-        name: '2018 Participant',
-        test: (user) => participant(user, 2018),
-        icon: icon2018bw
-    },
-    {
-        name: '2018 Complete!',
-        test: (user) => completedYear(user, 2018),
-        icon: icon2018c
-    },
-    {
-        name: '2019 Participant',
-        test: (user) => participant(user, 2019),
-        icon: icon2019bw
-    },
-    {
-        name: '2019 Complete!',
-        test: (user) => completedYear(user, 2019),
-        icon: icon2019c
-    },
-    {
-        name: '2020 Participant',
-        test: (user) => participant(user, 2020),
-        icon: icon2020bw
-    },
-    {
-        name: '2020 Complete!',
-        test: (user) => completedYear(user, 2020),
-        icon: icon2020c
-    }
+  {
+    name: '2014 Participant',
+    test: (user) => participant(user, 2014),
+    icon: icon2014bw
+  },
+  {
+    name: '2014 Complete!',
+    test: (user) => completedYear(user, 2014),
+    icon: icon2014c
+  },
+  {
+    name: '2015 Participant',
+    test: (user) => participant(user, 2015),
+    icon: icon2015bw
+  },
+  {
+    name: '2015 Complete!',
+    test: (user) => completedYear(user, 2015),
+    icon: icon2015c
+  },
+  {
+    name: '2016 Participant',
+    test: (user) => participant(user, 2016),
+    icon: icon2016bw
+  },
+  {
+    name: '2016 Complete!',
+    test: (user) => completedYear(user, 2016),
+    icon: icon2016c
+  },
+  {
+    name: '2017 Participant',
+    test: (user) => participant(user, 2017),
+    icon: icon2017bw
+  },
+  {
+    name: '2017 Complete!',
+    test: (user) => completedYear(user, 2017),
+    icon: icon2017c
+  },
+  {
+    name: '2018 Participant',
+    test: (user) => participant(user, 2018),
+    icon: icon2018bw
+  },
+  {
+    name: '2018 Complete!',
+    test: (user) => completedYear(user, 2018),
+    icon: icon2018c
+  },
+  {
+    name: '2019 Participant',
+    test: (user) => participant(user, 2019),
+    icon: icon2019bw
+  },
+  {
+    name: '2019 Complete!',
+    test: (user) => completedYear(user, 2019),
+    icon: icon2019c
+  },
+  {
+    name: '2020 Participant',
+    test: (user) => participant(user, 2020),
+    icon: icon2020bw
+  },
+  {
+    name: '2020 Complete!',
+    test: (user) => completedYear(user, 2020),
+    icon: icon2020c
+  }
 ];

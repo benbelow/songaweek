@@ -38,7 +38,7 @@ function getSoundCloudIdFromLink(link) {
 function createPlaylist(trackIds, playlistTitle, isPrivate) {
   let sharing = isPrivate ? 'private' : 'public';
   const tracks = trackIds.map(id => {
-    return { id: id }
+    return { id: id };
   });
   return getExistingPlaylists()
     .then(playlists => {
@@ -48,12 +48,12 @@ function createPlaylist(trackIds, playlistTitle, isPrivate) {
         SC.connect().then(function () {
           SC.post('/playlists', {
             playlist: { title: playlistTitle, tracks: tracks, sharing: sharing }
-          })
+          });
         });
       } else {
         const existingList = playlists.filter(p => p.title === playlistTitle)[0];
         const newTracks = tracks.filter(track => {
-          return !existingList.tracks.map(t => t.id).includes(track.id)
+          return !existingList.tracks.map(t => t.id).includes(track.id);
         });
         const allTracks = newTracks.concat(existingList.tracks);
 
@@ -61,7 +61,7 @@ function createPlaylist(trackIds, playlistTitle, isPrivate) {
           playlist: { tracks: allTracks, sharing: sharing }
         });
       }
-    })
+    });
 }
 
 async function getExistingPlaylists() {

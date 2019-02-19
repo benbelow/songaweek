@@ -1,40 +1,40 @@
 :root {
-  --header-height: 70px;
-  --header-padding: 20px;
+    --header-height: 70px;
+    --header-padding: 20px;
 }
 
 .App {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .App-logo {
-  height: 80px;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  z-index: 100;
-  height: var(--header-height);
-  padding: var(--header-padding);
-  color: white;
+    background-color: #222;
+    z-index: 100;
+    height: var(--header-height);
+    padding: var(--header-padding);
+    color: white;
 }
 
 .App-body {
-  padding-top: 20px;
+    padding-top: 20px;
 }
 
 .App-title {
-  color: white;
-  cursor: pointer;
+    color: white;
+    cursor: pointer;
 }
 
 .App-title:hover {
-  color: grey;
-  cursor: pointer;
+    color: grey;
+    cursor: pointer;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }

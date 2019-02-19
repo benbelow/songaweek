@@ -5,9 +5,9 @@ const initialState = {};
 const FilterReducer = (state = initialState, action) => {
   switch (action.type) {
     case ENABLE_FILTER:
-      return {...state, [action.filterName]: true};
+      return { ...state, [action.filterName]: true };
     case DISABLE_FILTER:
-      return {...state, [action.filterName]: false};
+      return { ...state, [action.filterName]: false };
     default:
       return state;
   }

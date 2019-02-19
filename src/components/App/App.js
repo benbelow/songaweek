@@ -20,32 +20,32 @@ import FeedbackPage from '../../scenes/feedback/FeedbackPage';
 import './App.css';
 
 class App extends Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <Provider store={store()}>
-                    <MuiThemeProvider>
-                        <div className="App">
-                            <AppHeader/>
-                            <Filters/>
-                            <div className="App-body">
-                                <ThreadFetcher/>
-                                <Switch>
-                                    <Route path='/threads' component={SubmissionThreads}/>
-                                    <Route path='/users' component={Users}/>
-                                    <Route path='/admin' component={Admin}/>
-                                    <Route path='/stats' component={StatsPage}/>
-                                    <Route path='/feedback' component={FeedbackPage}/>
-                                    <Route path="/callback.html" component={SoundcloudCallback}/>
-                                    <Redirect from='*' to='threads'/>
-                                </Switch>
-                            </div>
-                        </div>
-                    </MuiThemeProvider>
-                </Provider>
-            </BrowserRouter>
-        );
-    }
+  render() {
+    return (
+      <BrowserRouter>
+        <Provider store={store()}>
+          <MuiThemeProvider>
+            <div className="App">
+              <AppHeader/>
+              <Filters/>
+              <div className="App-body">
+                <ThreadFetcher/>
+                <Switch>
+                  <Route path='/threads' component={SubmissionThreads}/>
+                  <Route path='/users' component={Users}/>
+                  <Route path='/admin' component={Admin}/>
+                  <Route path='/stats' component={StatsPage}/>
+                  <Route path='/feedback' component={FeedbackPage}/>
+                  <Route path="/callback.html" component={SoundcloudCallback}/>
+                  <Redirect from='*' to='threads'/>
+                </Switch>
+              </div>
+            </div>
+          </MuiThemeProvider>
+        </Provider>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
