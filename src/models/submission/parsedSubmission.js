@@ -7,8 +7,8 @@ const markdownLinkWithSpaceRegexGlobal = /\[(.*?)\] \(.*?\)/;
 const themedRegex = /(\[|\(|(\\\[)|(\\\())Themed(]|\)|(\\\])|(\\\)))/i;
 const notThemedRegex = /(\[|\(|(\\\[)|(\\\())Not Themed(]|\)|(\\\])|(\\\)))/i;
 
-const openingBracketsRegex = /^(\s?)+\(([^)]+)\)/;
-const openingSquareBracketsRegex = /^(\s?)+\[([^\]]+)]/;
+const openingBracketsRegex = /^(\s?)+(\(|\\\()([^)]+)(\)|\\\))/;
+const openingSquareBracketsRegex = /^(\s?)+(\[|\\\[)([^\]]+)(]|\\\])/;
 
 //todo refactor this class - chaining is good, but must require the state gets reset or bad stuff happens. 2x classes?
 
@@ -96,8 +96,8 @@ export default class ParsedSubmission {
       return undefined;
     }
     const bracketRegex = hasParensGenre ? openingBracketsRegex : openingSquareBracketsRegex;
-    const innerRegex = hasParensGenre ? /\((.*?)\)/ : /\[(.*?)]/;
-    return _.first(strippedComment.match(bracketRegex)).replace('\n', '').match(innerRegex)[1];
+    const innerRegex = hasParensGenre ? /(\(|\\\()(.*?)(\)|\\\))/ : /(\[|\\\[)(.*?)(]|\\\])/;
+    return _.first(strippedComment.match(bracketRegex)).replace('\n', '').match(innerRegex)[2];
   }
 
   themed() {

@@ -16,6 +16,8 @@ describe('parsed submission', () => {
       // { comment: '[Themed](as a markdown http://www.link.com) (Not themed)', themed: false},
       { comment: '[name](link)(themed)(genre)', themed: true },
       { comment: '[name](link)(genre) somewhere in the description [Themed]', themed: true },
+      { comment: '[Rainy Jam](https://soundcloud.com/user-535328441/rainy-jam) (Folk/Country) \[Themed\]', themed: true },
+      { comment: '[Rainy Jam](https://soundcloud.com/user-535328441/rainy-jam) (Folk/Country) \(Themed\)', themed: true },
       { comment: '[Rainy Jam](https://soundcloud.com/user-535328441/rainy-jam) (Folk/Country) \\[Themed\\]', themed: true },
       { comment: '[Rainy Jam](https://soundcloud.com/user-535328441/rainy-jam) (Folk/Country) \\(Themed\\)', themed: true },
     ].forEach(({ comment, themed }) => {
@@ -37,8 +39,13 @@ describe('parsed submission', () => {
       { comment: '[song name](link.to.song) description with brackets (genre)', expectedGenre: undefined },
       { comment: '[song name](http://www.linktosong.com)(genre) ', expectedGenre: 'genre' },
       { comment: '[song name] (http://www.linktosong.com)(genre) ', expectedGenre: 'genre' },
+      { comment: '[song name] (http://www.linktosong.com)\(genre\) ', expectedGenre: 'genre' },
+      { comment: '[song name] (http://www.linktosong.com)\\(genre\\) ', expectedGenre: 'genre' },
       { comment: '[song name](http://www.linktosong.com)[genre] ', expectedGenre: 'genre' },
       { comment: '[song name] (http://www.linktosong.com)[genre] ', expectedGenre: 'genre' },
+      { comment: '[song name] (http://www.linktosong.com)\[genre\] ', expectedGenre: 'genre' },
+      { comment: '[song name] (http://www.linktosong.com)\\[genre\\] ', expectedGenre: 'genre' },
+      { comment: '[Lost](https://soundcloud.com/mx-mr/lost) \\[Indie Pop\\] \\[Themed\\]', expectedGenre: 'Indie Pop' },
 
       // With themed flag
       { comment: '[name](link)(Themed)(genre)', expectedGenre: 'genre' },
