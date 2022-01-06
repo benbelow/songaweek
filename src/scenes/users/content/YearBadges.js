@@ -15,6 +15,12 @@ import icon2015c from '../../../assets/2015c.png';
 import icon2014bw from '../../../assets/2014bw.png';
 import icon2014c from '../../../assets/2014c.png';
 
+import icon2021bw from '../../../assets/2021bw.jpg';
+import icon2021c from '../../../assets/2021c.png';
+
+import icon2022bw from '../../../assets/2022bw.jpg';
+import icon2022c from '../../../assets/2022c.png';
+
 const completedYear = (user, year) => submissionsInYear(user, year).length >= 52;
 
 const participant = (user, year) => submissionYears(user).includes(year) && !completedYear(user, year);
@@ -89,5 +95,25 @@ export default [
     name: '2020 Complete!',
     test: (user) => completedYear(user, 2020),
     icon: icon2020c
+  },
+  {
+    name: '2021 Participant',
+    test: (user) => participant(user, 2021),
+    icon: icon2021bw
+  },
+  {
+    name: '2021 Complete!',
+    test: (user) => completedYear(user, 2021),
+    icon: icon2021c
+  },
+  {
+    name: '2022 Participant',
+    test: (user) => participant(user, 2022),
+    icon: icon2022bw
+  },
+  {
+    name: '2022 Complete!',
+    test: (user) => completedYear(user, 2022),
+    icon: icon2022c
   }
 ];
